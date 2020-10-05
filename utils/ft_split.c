@@ -1,0 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wolfey <wolfey@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/04 18:47:58 by keddib            #+#    #+#             */
+/*   Updated: 2020/03/31 05:44:36 by wolfey           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header.h"
+
+static int count_words(const char *s, char c)
+{
+	int i;
+	int inw;
+
+	i = 0;
+	inw = 0;
+	window.num_map_cols = 0;
+	while ((size_t)i <= ft_strlen(s))
+	{
+		if (s[i] == c || s[i] == '\0')
+		{
+			if (inw == 0)
+			{
+				i++;
+				continue;
+			}
+			window.num_map_cols++;
+			inw = 0;
+		}
+		else
+			inw = 1;
+		i++;
+	}
+	return (window.num_map_cols);
+}
+
+static int count_char(const char *s, char c)
+{
+	int len;
+
+	len = 0;
+	while (s[len] != c && s[len])
+	{
+		len++;
+	}
+	return (len);
+}
+
+static void *ft_free(char **s, int i)
+{
+	while (i >= 0)
+	{
+		free(s[i]);
+		i--;
+	}
+	free(s);
+	return (NULL);
+}
+
+char **ft_split(char const *s, char c)
+{
+	char **arr;
+	int p;
+	int i;
+	int j;
+
+	if (!s)
+		return (NULL);
+	p = count_words(s, c);
+	arr = malloc((p + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s[i] && j < p)
+	{
+		while (s[i] == c)
+			i++;
+		arr[j] = ft_substr(s, i, count_char(s + i, c));
+		if (!arr[j])
+			return (ft_free(arr, (j - 1)));
+		j++;
+		i = i + count_char(s + i, c);
+	}
+	arr[j] = NULL;
+	return (arr);
+}
