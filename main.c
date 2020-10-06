@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/05 19:16:57 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/05 23:10:55 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ void render_3d_projection()
 		int wallBottomPixel = (window.height / 2) + (wallStripeHieght / 2);
 		if (wallBottomPixel > window.height)
 			wallBottomPixel = window.height;
-		// float opaticy = wallStipeHieght / window.height;
-		// opaticy += 0.4;
+
 		for (int y = wallTopPixel; y < wallBottomPixel; y++)
 		{
 			int color = rays[i].was_hit_vertical ? 0xd3d3d3 : 0xffffff;
 			my_mlx_pixel_put(&mlx, i, y, color);
 		}
+		for (int c = 0; c < wallTopPixel; c++)
+			my_mlx_pixel_put(&mlx, i, c, 0x5cabf4);
+		for (int f = wallBottomPixel; f < window.height; f++)
+			my_mlx_pixel_put(&mlx, i, f, 0xc58b00);
 	}
 }
 
@@ -56,9 +59,9 @@ int update(void *param)
 	//render_player(player.x, player.y);
 	cast_all_rays();
 	// for (int i = 0; i < window.num_rays; i++)
-	// 	// {
-	// 	// 	render_ray(i);
-	// 	// }
+	// {
+	// 	render_ray(i);
+	// }
 	render_3d_projection();
 	mlx_put_image_to_window(mlx.pointer, mlx.window, mlx.image, 0, 0);
 	return 0;
@@ -72,7 +75,6 @@ int main()
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
 	setup_player();
-	//map_render();
 	mlx_hook(mlx.window, 2, 1L << 0, key_pressed, (void *)0);
 	mlx_hook(mlx.window, 3, (1L << 1), key_released, (void *)0);
 	mlx_put_image_to_window(mlx.pointer, mlx.window, mlx.image, 0, 0);
