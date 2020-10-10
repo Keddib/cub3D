@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wolfey <wolfey@student.42.fr>              +#+  +:+       +#+        */
+/*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 18:47:58 by keddib            #+#    #+#             */
-/*   Updated: 2020/03/31 05:44:36 by wolfey           ###   ########.fr       */
+/*   Updated: 2020/10/10 20:53:36 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int count_char(const char *s, char c)
 	return (len);
 }
 
-static void *ft_free(char **s, int i)
+void *ft_free(char **s, int i)
 {
 	while (i >= 0)
 	{

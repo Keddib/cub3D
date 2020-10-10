@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/05 23:10:55 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/11 00:52:26 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int update(void *param)
 	update_player();
 	//render_player(player.x, player.y);
 	cast_all_rays();
-	// for (int i = 0; i < window.num_rays; i++)
-	// {
-	// 	render_ray(i);
-	// }
+	//for (int i = 0; i < window.num_rays; i++)
+	//{
+	//	render_ray(i);
+	//}
 	render_3d_projection();
 	mlx_put_image_to_window(mlx.pointer, mlx.window, mlx.image, 0, 0);
 	return 0;

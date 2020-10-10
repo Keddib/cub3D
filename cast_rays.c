@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:25:11 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/05 17:40:05 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/11 00:51:50 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,12 @@ int cast_ray(float ray_angle, int i)
     // Increment xstep and ystep until we find a wall
     while (nextHorzTouchX >= 0 && nextHorzTouchX <= window.width && nextHorzTouchY >= 0 && nextHorzTouchY <= window.height)
     {
+        float yToCheck;
         float xToCheck = nextHorzTouchX;
-        float yToCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0);
+        if (isRayFacingDown)
+            yToCheck = nextHorzTouchY + 1;
+        else
+            yToCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0);
 
         if (is_this_wall(xToCheck, yToCheck))
         {

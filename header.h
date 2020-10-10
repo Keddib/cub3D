@@ -106,4 +106,5 @@ void draw_line(float x1, float y1, float x2, float y2);
 void cast_all_rays();
 int cast_ray(float ray_angle, int i);
 void render_ray(int index);
+void *ft_free(char **s, int i);
 #endif
