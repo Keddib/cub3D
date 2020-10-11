@@ -74,7 +74,6 @@ int main()
 	mlx.window = mlx_new_window(mlx.pointer, window.width, window.height, "Cub3d");
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
-	setup_player();
 	mlx_hook(mlx.window, 2, 1L << 0, key_pressed, (void *)0);
 	mlx_hook(mlx.window, 3, (1L << 1), key_released, (void *)0);
 	mlx_put_image_to_window(mlx.pointer, mlx.window, mlx.image, 0, 0);
