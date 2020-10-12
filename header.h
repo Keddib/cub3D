@@ -21,6 +21,7 @@
 #define TURN_SPEED (1 * RADIUN)
 #define FOV_ANGLE (60 * RADIUN)
 #define RAY_WIDTH 1
+#define INT_MAX 2147483647
 
 typedef struct s_ray
 {

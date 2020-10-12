@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:25:11 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/11 00:51:50 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/12 12:40:30 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,10 @@ int cast_ray(float ray_angle, int i)
     // Calculate both horizontal and vertical hit distances and choose the smallest one
     float horzHitDistance = foundHorzWallHit
                                 ? distance_between_points(player.x, player.y, horzWallHitX, horzWallHitY)
-                                : __INT_MAX__;
+                                : (float)INT_MAX;
     float vertHitDistance = foundVertWallHit
                                 ? distance_between_points(player.x, player.y, vertWallHitX, vertWallHitY)
-                                : __INT_MAX__;
+                                : (float)INT_MAX;
     if (vertHitDistance < horzHitDistance)
     {
         rays[i].distance = vertHitDistance;
