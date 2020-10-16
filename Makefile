@@ -1,10 +1,10 @@
 #-g -fsanitize=address
 all:
-	@clang -g *.c ./utils/*.c -o game -lmlx -lX11 -lXext -fPIC -lm
+	@gcc -g -fsanitize=address -I /usr/local/include *.c ./utils/*.c -o game -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lm
 	@./game
 
 build:
-	@clang *.c ./utils/*.c -o game -lmlx -lX11 -lXext -fPIC -lm
+	@gcc -I /usr/local/include *.c ./utils/*.c -o game -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lm
 
 run:
 	@./game

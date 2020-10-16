@@ -75,7 +75,7 @@ typedef struct s_player
 t_win window;
 t_player player;
 t_data mlx;
-t_ray rays[10000];
+// t_ray rays[10000];
 
 int get_next_line(int fd, char **line);
 size_t ft_strlen(const char *s);
@@ -104,8 +104,8 @@ void setup_player();
 void update_player();
 int is_this_wall(float x, float y);
 void draw_line(float x1, float y1, float x2, float y2);
-void cast_all_rays();
-int cast_ray(float ray_angle, int i);
+t_ray *cast_all_rays();
+int cast_ray(float ray_angle, t_ray *rays);
 void render_ray(int index);
 void *ft_free(char **s, int i);
 #endif

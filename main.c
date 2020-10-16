@@ -20,9 +20,9 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void render_3d_projection()
+void render_3d_projection(t_ray *rays)
 {
-	for (int i = 0; i < window.num_rays; i++)
+	for (int i = 0; i < window.width; i++)
 	{
 		float correctWallDistance =
 			rays[i].distance * cos(rays[i].ray_angle - player.rotation_angle);
@@ -50,6 +50,7 @@ void render_3d_projection()
 
 int update(void *param)
 {
+	t_ray *rays;
 	mlx_destroy_image(mlx.pointer, mlx.image);
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
@@ -57,13 +58,14 @@ int update(void *param)
 	//map_render();
 	update_player();
 	//render_player(player.x, player.y);
-	cast_all_rays();
+	rays = cast_all_rays();
 	//for (int i = 0; i < window.num_rays; i++)
 	//{
 	//	render_ray(i);
 	//}
-	render_3d_projection();
+	render_3d_projection(rays);
 	mlx_put_image_to_window(mlx.pointer, mlx.window, mlx.image, 0, 0);
+	free(rays);
 	return 0;
 }
 

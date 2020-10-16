@@ -15,19 +15,19 @@
 int key_pressed(int key, void *param)
 {
 
-    if (key == 65307)
+    if (key == 53)
         ft_exit(0);
-    if (key == 119)
+    if (key == 13)
         player.walk_direction = +1;
-    else if (key == 115)
+    else if (key == 1)
         player.walk_direction = -1;
-    else if (key == 100)
+    else if (key == 2)
         player.side_direction = +1;
-    else if (key == 97)
+    else if (key == 0)
         player.side_direction = -1;
-    else if (key == 65363)
+    else if (key == 124)
         player.turn_direction = +1;
-    else if (key == 65361)
+    else if (key == 123)
         player.turn_direction = -1;
     update_player();
     return 0;
@@ -35,17 +35,17 @@ int key_pressed(int key, void *param)
 
 int key_released(int key, void *param)
 {
-    if (key == 119)
+    if (key == 13)
         player.walk_direction = 0;
-    else if (key == 115)
+    else if (key == 1)
         player.walk_direction = 0;
-    else if (key == 100)
+    else if (key == 2)
         player.side_direction = 0;
-    else if (key == 97)
+    else if (key == 0)
         player.side_direction = 0;
-    else if (key == 65363)
+    else if (key == 124)
         player.turn_direction = 0;
-    else if (key == 65361)
+    else if (key == 123)
         player.turn_direction = 0;
     update_player();
     return 0;

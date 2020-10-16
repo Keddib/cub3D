@@ -33,7 +33,7 @@ float distance_between_points(float x1, float y1, float x2, float y2)
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-int cast_ray(float ray_angle, int i)
+int cast_ray(float ray_angle, t_ray *ray)
 {
     ray_angle = normalizeAngle(ray_angle);
 
@@ -156,43 +156,45 @@ int cast_ray(float ray_angle, int i)
                                 : (float)INT_MAX;
     if (vertHitDistance < horzHitDistance)
     {
-        rays[i].distance = vertHitDistance;
-        rays[i].wall_hit_x = vertWallHitX;
-        rays[i].wall_hit_y = vertWallHitY;
-        rays[i].was_hit_vertical = 1;
+        ray->distance = vertHitDistance;
+        ray->wall_hit_x = vertWallHitX;
+        ray->wall_hit_y = vertWallHitY;
+        ray->was_hit_vertical = 1;
     }
     else
     {
-        rays[i].distance = horzHitDistance;
-        rays[i].wall_hit_x = horzWallHitX;
-        rays[i].wall_hit_y = horzWallHitY;
-        rays[i].was_hit_vertical = 0;
+        ray->distance = horzHitDistance;
+        ray->wall_hit_x = horzWallHitX;
+        ray->wall_hit_y = horzWallHitY;
+        ray->was_hit_vertical = 0;
     }
-    rays[i].ray_angle = ray_angle;
-    rays[i].ray_facingdown = isRayFacingDown;
-    rays[i].ray_facingup = isRayFacingUp;
-    rays[i].ray_facingleft = isRayFacingLeft;
-    rays[i].ray_facingright = isRayFacingRight;
+    ray->ray_angle = ray_angle;
+    ray->ray_facingdown = isRayFacingDown;
+    ray->ray_facingup = isRayFacingUp;
+    ray->ray_facingleft = isRayFacingLeft;
+    ray->ray_facingright = isRayFacingRight;
     return (0);
 }
 
-void cast_all_rays()
+t_ray *cast_all_rays()
 {
-    int columnId = 0;
     int i = 0;
-    float ray_angle = player.rotation_angle - (FOV_ANGLE / 2);
-    window.num_rays = window.width;
-    while (i < window.num_rays)
+    float ray_angle;
+    t_ray *rays;
+    
+    ray_angle = player.rotation_angle - (FOV_ANGLE / 2);
+    rays = malloc(sizeof(t_ray) * window.width);
+    while (i < window.width)
 
     {
-        cast_ray(ray_angle, columnId);
-        ray_angle += (FOV_ANGLE / window.num_rays);
-        columnId++;
+        cast_ray(ray_angle, &rays[i]);
+        ray_angle += (FOV_ANGLE / window.width);
         i++;
     }
+    return rays;
 }
 
-void render_ray(int index)
-{
-    draw_line(player.x, player.y, rays[index].wall_hit_x, rays[index].wall_hit_y);
-}
+// void render_ray(int index)
+// {
+//     draw_line(player.x, player.y, rays[index].wall_hit_x, rays[index].wall_hit_y);
+// }
