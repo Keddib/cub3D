@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 09:45:37 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/10 20:54:25 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/18 00:38:04 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void check_array(int j, int i)
     {
         player.x = i * window.tile_size;
         player.y = j * window.tile_size;
-	if (window.array[j][i] == 'S')
-		player.rotation_angle = M_PI / 2;
-	else if (window.array[j][i] == 'N')
-		player.rotation_angle = M_PI * 1.5;
+        if (window.array[j][i] == 'S')
+            player.rotation_angle = M_PI / 2;
+        else if (window.array[j][i] == 'N')
+            player.rotation_angle = M_PI * 1.5;
     }
     if (j == 0 || (j == window.num_map_cols - 1))
         ft_exit(2);
