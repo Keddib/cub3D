@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/11 00:52:26 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/17 02:06:58 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ int update(void *param)
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
 	mlx_new_image(mlx.pointer, window.width, window.height);
-	//map_render();
+	map_render();
 	update_player();
-	//render_player(player.x, player.y);
+	render_player(player.x, player.y);
 	rays = cast_all_rays();
-	//for (int i = 0; i < window.num_rays; i++)
-	//{
-	//	render_ray(i);
-	//}
-	render_3d_projection(rays);
+	for (int i = 0; i < window.width; i++)
+	{
+		render_ray(&rays[i]);
+	}
+	// render_3d_projection(rays);
 	mlx_put_image_to_window(mlx.pointer, mlx.window, mlx.image, 0, 0);
 	free(rays);
 	return 0;

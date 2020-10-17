@@ -17,7 +17,7 @@
 #define PI_TWO (PI * 2)
 #define FOV_ANGEL (60 * (PI / 180))
 #define RADIUN (PI / 180)
-#define WALK_SPEED 1.0
+#define WALK_SPEED 1.6
 #define TURN_SPEED (1 * RADIUN)
 #define FOV_ANGLE (60 * RADIUN)
 #define RAY_WIDTH 1
@@ -72,10 +72,28 @@ typedef struct s_player
     char last_move;
 } t_player;
 
+typedef struct s_incept
+{
+    float xintercept;
+    float yintercept;
+    float xstep;
+    float ystep;
+    float horz_x;
+    float horz_y;
+    float vert_x;
+    float vert_y;
+    float horz_distance;
+    float vert_distance;
+    float check_x;
+    float check_y;
+    int is_horz_hit;
+    int is_vert_hit;
+
+} t_incept;
+
 t_win window;
 t_player player;
 t_data mlx;
-// t_ray rays[10000];
 
 int get_next_line(int fd, char **line);
 size_t ft_strlen(const char *s);
@@ -87,25 +105,24 @@ size_t ft_strlcpy(char *dst, const char *src, size_t size);
 int ft_atoi(const char *str);
 void *ft_memchr(const void *s, int c, size_t n);
 char *ft_strrchr(const char *str, int c);
-void read_file(char *p);
 void ft_putstr(char *s);
 char **ft_split(char const *s, char c);
+void read_file(char *p);
 int key_pressed(int key, void *param);
 int key_released(int key, void *param);
 void ft_exit(int i);
-void ft_square(int x, int y, int color);
 void map_render();
 void render_player(int x, int y);
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void setup();
-int update(void *param);
-void render();
 void setup_player();
 void update_player();
 int is_this_wall(float x, float y);
-void draw_line(float x1, float y1, float x2, float y2);
 t_ray *cast_all_rays();
-int cast_ray(float ray_angle, t_ray *rays);
-void render_ray(int index);
+void render_ray(t_ray *ray);
 void *ft_free(char **s, int i);
+void get_horizontal(t_ray *ray, t_incept *incept);
+void get_vertical(t_ray *ray, t_incept *incept);
+float distance_between_points(float x1, float y1, float x2, float y2);
+void calc_distances(t_ray *ray, t_incept *incept);
+
 #endif

@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   cub_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/24 02:19:08 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/05 03:34:51 by keddib           ###   ########.fr       */
+/*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
+/*   Updated: 2020/10/17 02:00:44 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-/*
-** here I will setup my player and render it, the update also will be here
-*/
 
 void update_player()
 {
@@ -37,35 +33,38 @@ void update_player()
     }
 }
 
-void draw_line(float x1, float y1, float x2, float y2)
+int is_this_wall(float x, float y)
 {
-    float dx = x2 - x1;
-    float dy = y2 - y1;
-    float steps;
-    float incx;
-    float incy;
-    float i1 = x1;
-    float j1 = y1;
+  if (x < 0 || x > window.width || y < 0 || y > window.height)
+    return 1;
+  int index_x;
+  int index_y;
+  index_x = floor(x / window.tile_size);
+  index_y = floor(y / window.tile_size);
+  if (index_y >= window.num_map_cols || index_x >= window.num_map_rows)
+    return 1;
 
-    steps = (fabsf(dx) > fabsf(dy) ? fabsf(dx) : fabsf(dy));
-    incx = dx / steps;
-    incy = dy / steps;
-    while (steps > 0)
-    {
-        my_mlx_pixel_put(&mlx, x1, y1, 0xffff00);
-        i1 += incx;
-        j1 += incy;
-        x1 = i1;
-        y1 = j1;
-        steps--;
-    }
+  if (window.array[index_y][index_x] == '1')
+    return 1;
+  return 0;
 }
 
-void render_player(int x, int y)
+void ft_exit(int i)
 {
-    my_mlx_pixel_put(&mlx, x, y, 0xffffff);
-    draw_line(x,
-              y,
-              x + (cos(player.rotation_angle) * 15),
-              y + (sin(player.rotation_angle) * 15));
+  if (i == 0)
+  {
+    ft_free(window.array, window.num_map_cols);
+    mlx_destroy_window(mlx.pointer, mlx.window);
+    free(mlx.image);
+    mlx.image = NULL;
+    mlx.window = NULL;
+    mlx.pointer = NULL;
+  }
+  else if (i == 1)
+    ft_putstr("ERROR\nFILE NOT FOUND\n");
+  else if (i == 2)
+    ft_putstr("ERROR\nMAP INVALIDb\n");
+  else if (i == 3)
+    ft_putstr("ERROR\nDUPP PLAYER\n");
+  exit(0);
 }
