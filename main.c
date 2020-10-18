@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/18 00:38:30 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/18 01:17:41 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,44 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void render_walls(t_ray *ray, int i)
+{
+	int start;
+	int color;
+
+	start = ray[i].wall_top;
+	color = ray[i].was_hit_vertical ? 0xd3d3d3 : 0xffffff;
+	while (start < ray[i].wall_bottom)
+		my_mlx_pixel_put(&mlx, i, start++, color);
+	start = 0;
+	while (start < ray[i].wall_top)
+		my_mlx_pixel_put(&mlx, i, start++, 0x5cabf4);
+	start = ray[i].wall_bottom;
+	while (start < window.height)
+		my_mlx_pixel_put(&mlx, i, start++, 0xc58b00);
+}
+
 void render_3d_projection(t_ray *rays)
 {
-	for (int i = 0; i < window.width; i++)
-	{
-		float correctWallDistance =
-			rays[i].distance * cos(rays[i].ray_angle - player.rotation_angle);
-		float distanceProjPlane = (window.width / 2) / tan(FOV_ANGLE / 2);
-		float wallHieght = (window.tile_size / correctWallDistance) * distanceProjPlane;
-		int wallStripeHieght = (int)wallHieght;
-		int wallTopPixel = (window.height / 2) - (wallStripeHieght / 2);
-		if (wallTopPixel < 0)
-			wallTopPixel = 0;
-		int wallBottomPixel = (window.height / 2) + (wallStripeHieght / 2);
-		if (wallBottomPixel > window.height)
-			wallBottomPixel = window.height;
+	int i;
+	int wall_stripe_hieght;
+	float correct_distance;
+	float distance_proj_plane;
 
-		for (int y = wallTopPixel; y < wallBottomPixel; y++)
-		{
-			int color = rays[i].was_hit_vertical ? 0xd3d3d3 : 0xffffff;
-			my_mlx_pixel_put(&mlx, i, y, color);
-		}
-		for (int c = 0; c < wallTopPixel; c++)
-			my_mlx_pixel_put(&mlx, i, c, 0x5cabf4);
-		for (int f = wallBottomPixel; f < window.height; f++)
-			my_mlx_pixel_put(&mlx, i, f, 0xc58b00);
+	i = 0;
+	while (i < window.width)
+	{
+		correct_distance =
+			rays[i].distance * cos(rays[i].ray_angle - player.rotation_angle);
+		distance_proj_plane = (window.width / 2) / tan(FOV_ANGLE / 2);
+		wall_stripe_hieght = (int)((window.tile_size / correct_distance) * distance_proj_plane);
+		rays[i].wall_top = (window.height / 2) - (wall_stripe_hieght / 2);
+		if (rays[i].wall_top < 0)
+			rays[i].wall_top = 0;
+		rays[i].wall_bottom = (window.height / 2) + (wall_stripe_hieght / 2);
+		if (rays[i].wall_bottom > window.height)
+			rays[i].wall_bottom = window.height;
+		render_walls(rays, i++);
 	}
 }
 
