@@ -1,5 +1,6 @@
 #-g -fsanitize=address
 all:
+	@xdpyinfo | grep dimensions > resolution
 	@gcc -I /usr/local/include *.c ./utils/*.c -o game -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lm
 	@./game
 
