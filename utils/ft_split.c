@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 18:47:58 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/10 20:53:36 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/19 18:14:19 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int count_words(const char *s, char c)
 
 	i = 0;
 	inw = 0;
-	window.num_map_cols = 0;
+	window.num_cols = 0;
 	while ((size_t)i <= ft_strlen(s))
 	{
 		if (s[i] == c || s[i] == '\0')
@@ -29,14 +29,14 @@ static int count_words(const char *s, char c)
 				i++;
 				continue;
 			}
-			window.num_map_cols++;
+			window.num_cols++;
 			inw = 0;
 		}
 		else
 			inw = 1;
 		i++;
 	}
-	return (window.num_map_cols);
+	return (window.num_cols);
 }
 
 static int count_char(const char *s, char c)

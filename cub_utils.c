@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/17 02:00:44 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/19 18:46:32 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,34 @@
 
 void update_player()
 {
-    float new_player_x;
-    float new_player_y;
-    float move_step;
-    float side_step;
+  float new_player_x;
+  float new_player_y;
+  float move_step;
+  float side_step;
 
-    	player.rotation_angle += player.turn_direction * TURN_SPEED;
-        move_step = player.walk_direction * (WALK_SPEED + player.move_speed);
-    	new_player_x = player.x + cos(player.rotation_angle) * move_step;
-    	new_player_y = player.y + sin(player.rotation_angle) * move_step;
-   	side_step = player.side_direction * WALK_SPEED;
-    	new_player_x += cos(player.rotation_angle + (90 * RADIUN)) * side_step;
-    	new_player_y += sin(player.rotation_angle + (90 * RADIUN)) * side_step;
-    if (!is_this_wall(new_player_x, new_player_y))
-    {
-        player.x = new_player_x;
-        player.y = new_player_y;
-    }
+  player.rotation_angle += player.turn_direction * TURN_SPEED;
+  move_step = player.walk_direction * WALK_SPEED;
+  new_player_x = player.x + cos(player.rotation_angle) * move_step;
+  new_player_y = player.y + sin(player.rotation_angle) * move_step;
+  side_step = player.side_direction * WALK_SPEED;
+  new_player_x += cos(player.rotation_angle + (90 * RADIUN)) * side_step;
+  new_player_y += sin(player.rotation_angle + (90 * RADIUN)) * side_step;
+  if (!is_this_wall(new_player_x, new_player_y))
+  {
+    player.x = new_player_x;
+    player.y = new_player_y;
+  }
 }
 
 int is_this_wall(float x, float y)
 {
-  if (x < 0 || x > window.width || y < 0 || y > window.height)
+  if (x < 0 || x > (window.num_rows * TILE_SIZE) || y < 0 || y > (window.num_cols * TILE_SIZE))
     return 1;
   int index_x;
   int index_y;
-  index_x = floor(x / window.tile_size);
-  index_y = floor(y / window.tile_size);
-  if (index_y >= window.num_map_cols || index_x >= window.num_map_rows)
+  index_x = floor(x / TILE_SIZE);
+  index_y = floor(y / TILE_SIZE);
+  if (index_y >= window.num_cols || index_x >= window.num_rows)
     return 1;
 
   if (window.array[index_y][index_x] == '1')
@@ -53,7 +53,7 @@ void ft_exit(int i)
 {
   if (i == 0)
   {
-    ft_free(window.array, window.num_map_cols);
+    ft_free(window.array, window.num_cols);
     mlx_destroy_window(mlx.pointer, mlx.window);
     free(mlx.image);
     mlx.image = NULL;

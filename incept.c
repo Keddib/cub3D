@@ -50,10 +50,7 @@ void v_until_wall(float x, float y, t_incept *incept, t_ray *ray)
 {
     while (x >= 0 && x <= window.width && y >= 0 && y <= window.height)
     {
-        if (ray->ray_facingright)
-            incept->check_x = x + 1;
-        else
-            incept->check_x = x + (ray->ray_facingleft ? -1 : 0);
+        incept->check_x = x + (ray->ray_facingleft ? -1 : 0);
         incept->check_y = y;
         if (is_this_wall(incept->check_x, incept->check_y))
         {
@@ -83,15 +80,15 @@ void get_horizontal(t_ray *ray, t_incept *incept)
     incept->horz_x = 0;
     incept->horz_y = 0;
 
-    incept->yintercept = floor(player.y / window.tile_size) *
-                         window.tile_size;
-    incept->yintercept += ray->ray_facingdown ? window.tile_size : 0;
+    incept->yintercept = floor(player.y / TILE_SIZE) *
+                         TILE_SIZE;
+    incept->yintercept += ray->ray_facingdown ? TILE_SIZE : 0;
 
     incept->xintercept = player.x +
                          (incept->yintercept - player.y) / tan(ray->ray_angle);
-    incept->ystep = window.tile_size;
+    incept->ystep = TILE_SIZE;
     incept->ystep *= ray->ray_facingup ? -1 : 1;
-    incept->xstep = window.tile_size / tan(ray->ray_angle);
+    incept->xstep = TILE_SIZE / tan(ray->ray_angle);
     incept->xstep *= (ray->ray_facingleft && incept->xstep > 0) ? -1 : 1;
     incept->xstep *= (ray->ray_facingright && incept->xstep < 0) ? -1 : 1;
     next_x = incept->xintercept;
@@ -113,16 +110,16 @@ void get_vertical(t_ray *ray, t_incept *incept)
     incept->vert_x = 0;
     incept->vert_y = 0;
 
-    incept->xintercept = floor(player.x / window.tile_size) *
-                         window.tile_size;
-    incept->xintercept += ray->ray_facingright ? window.tile_size : 0;
+    incept->xintercept = floor(player.x / TILE_SIZE) *
+                         TILE_SIZE;
+    incept->xintercept += ray->ray_facingright ? TILE_SIZE : 0;
 
     incept->yintercept = player.y +
                          (incept->xintercept - player.x) * tan(ray->ray_angle);
 
-    incept->xstep = window.tile_size;
+    incept->xstep = TILE_SIZE;
     incept->xstep *= ray->ray_facingleft ? -1 : 1;
-    incept->ystep = window.tile_size * tan(ray->ray_angle);
+    incept->ystep = TILE_SIZE * tan(ray->ray_angle);
     incept->ystep *= (ray->ray_facingup && incept->ystep > 0) ? -1 : 1;
     incept->ystep *= (ray->ray_facingdown && incept->ystep < 0) ? -1 : 1;
     next_x = incept->xintercept;

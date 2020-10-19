@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/18 01:17:41 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/19 19:00:28 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void render_3d_projection(t_ray *rays)
 		correct_distance =
 			rays[i].distance * cos(rays[i].ray_angle - player.rotation_angle);
 		distance_proj_plane = (window.width / 2) / tan(FOV_ANGLE / 2);
-		wall_stripe_hieght = (int)((window.tile_size / correct_distance) * distance_proj_plane);
+		wall_stripe_hieght = (int)((TILE_SIZE / correct_distance) * distance_proj_plane);
 		rays[i].wall_top = (window.height / 2) - (wall_stripe_hieght / 2);
 		if (rays[i].wall_top < 0)
 			rays[i].wall_top = 0;
@@ -86,6 +86,7 @@ int main()
 {
 	mlx.pointer = mlx_init();
 	read_file("map.cub");
+	load_images();
 	mlx.window = mlx_new_window(mlx.pointer, window.width, window.height, "Cub3d");
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);

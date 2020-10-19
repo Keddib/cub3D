@@ -42,12 +42,10 @@ typedef struct s_data
 
 typedef struct s_win
 {
-    float tile_size;
     float width;
     float height;
-    float num_rays;
-    int num_map_rows;
-    int num_map_cols;
+    int num_rows;
+    int num_cols;
     char **array;
     char chr;
 } t_win;
@@ -56,13 +54,10 @@ typedef struct s_player
 {
     float x;
     float y;
-    float radius;
     int turn_direction;
     int walk_direction;
     int side_direction;
     float rotation_angle;
-    float move_speed;
-    char last_move;
 } t_player;
 
 typedef struct s_incept
