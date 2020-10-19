@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/19 19:00:28 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/19 20:56:29 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,23 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void render_walls(t_ray *ray, int i)
 {
 	int start;
-	int color;
+	unsigned int color;
 
 	start = ray[i].wall_top;
-	color = ray[i].was_hit_vertical ? 0xd3d3d3 : 0xffffff;
+	// color = ray[i].was_hit_vertical ? 0xd3d3d3 : 0xffffff;
+	if (ray[i].was_hit_vertical)
+	{
+	}
+	else
+	{
+	}
+
+	int offx = ;
 	while (start < ray[i].wall_bottom)
+	{
+		color = tex[(TILE_SIZE * offy) + offx];
 		my_mlx_pixel_put(&mlx, i, start++, color);
+	}
 	start = 0;
 	while (start < ray[i].wall_top)
 		my_mlx_pixel_put(&mlx, i, start++, 0x5cabf4);
@@ -86,7 +97,7 @@ int main()
 {
 	mlx.pointer = mlx_init();
 	read_file("map.cub");
-	load_images();
+	tex = load_images();
 	mlx.window = mlx_new_window(mlx.pointer, window.width, window.height, "Cub3d");
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);

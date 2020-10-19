@@ -82,5 +82,6 @@ typedef struct s_incept
 t_win window;
 t_player player;
 t_data mlx;
+unsigned int *tex;
 
 #endif

@@ -41,6 +41,6 @@ void get_horizontal(t_ray *ray, t_incept *incept);
 void get_vertical(t_ray *ray, t_incept *incept);
 float distance_between_points(float x1, float y1, float x2, float y2);
 void calc_distances(t_ray *ray, t_incept *incept);
-void load_images();
+unsigned int *load_images();
 
 #endif
