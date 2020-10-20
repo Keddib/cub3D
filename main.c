@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 17:42:23 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/20 20:51:41 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int update(t_texture *tex)
 	mlx_destroy_image(mlx.pointer, mlx.image);
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
-	mlx_new_image(mlx.pointer, window.width, window.height);
 	// map_render();
 	// render_player(player.x, player.y);
 	update_player();

@@ -7,7 +7,7 @@
 #define PI_TWO (PI * 2)
 #define FOV_ANGEL (60 * (PI / 180))
 #define RADIUN (PI / 180)
-#define WALK_SPEED 1.6
+#define WALK_SPEED 3
 #define TURN_SPEED (1 * RADIUN)
 #define FOV_ANGLE (60 * RADIUN)
 #define RAY_WIDTH 1

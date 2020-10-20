@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 17:53:34 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/20 20:33:06 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ void ft_exit(int i)
     ft_free(window.array, window.num_cols);
     mlx_destroy_window(mlx.pointer, mlx.window);
     free(mlx.image);
-    mlx.image = NULL;
-    mlx.window = NULL;
-    mlx.pointer = NULL;
+    // free(mlx.window);
+    free(mlx.addr);
+    // free(mlx.pointer);
+    // mlx.image = NULL;
+    // mlx.window = NULL;
+    // mlx.pointer = NULL;
   }
   else if (i == 1)
     ft_putstr("ERROR\nFILE NOT FOUND\n");
