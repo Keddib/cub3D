@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:25:11 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 11:14:17 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/20 13:46:46 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_ray *cast_all_rays()
 
     i = 0;
     ray_angle = player.rotation_angle - (FOV_ANGLE / 2);
-    rays = malloc(sizeof(t_ray) * window.width);
+    // rays = malloc(sizeof(t_ray) * window.width);
     while (i < window.width)
 
     {

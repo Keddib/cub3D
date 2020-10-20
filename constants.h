@@ -79,9 +79,17 @@ typedef struct s_incept
 
 } t_incept;
 
+typedef struct s_texture
+{
+    void *img;
+    int width;
+    int height;
+    unsigned int *data;
+    char *file;
+} t_texture;
+
 t_win window;
 t_player player;
 t_data mlx;
-unsigned int *tex;
 
 #endif
