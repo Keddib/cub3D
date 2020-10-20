@@ -15,5 +15,12 @@
         "titleBar.inactiveBackground": "#845ec299",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#845ec2"
+    "peacock.color": "#845ec2",
+    "files.associations": {
+        "array": "c",
+        "iterator": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c"
+    }
 }

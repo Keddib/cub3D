@@ -1,6 +1,6 @@
 #-g -fsanitize=address
 all:
-	@gcc -I /usr/local/include *.c ./utils/*.c -o game -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lm
+	@gcc -g -fsanitize=address -I /usr/local/include *.c ./utils/*.c -o game -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lm
 	@./game
 
 build:

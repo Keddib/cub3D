@@ -6,29 +6,35 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 18:47:18 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 12:27:17 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/20 17:49:09 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-t_texture *load_images()
+void *load_images(t_texture *tex)
 {
-    t_texture *tex;
-
-    tex = malloc(sizeof(t_texture) * 4);
-    tex[0].file = "tpics/colorstone.xpm";
-    tex[1].file = "tpics/greystone.xpm";
-    tex[2].file = "tpics/mossy.xpm";
-    tex[3].file = "tpics/redbrick.xpm";
-
-    for (int i = 0; i < 4; i++)
+    int fd, i;
+    i = 0;
+    tex->file[0] = "tpics/colorstone.xpm";
+    tex->file[1] = "tpics/greystone.xpm";
+    tex->file[2] = "tpics/mossy.xpm";
+    tex->file[3] = "tpics/redbrick.xpm";
+    fd = 0;
+    while (i < 4)
     {
-        tex[i].img = mlx_xpm_file_to_image(mlx.pointer, tex[i].file, &tex[i].width, &tex[i].height);
-        tex[i].data = (unsigned int *)mlx_get_data_addr(
-            tex[i].img,
+        fd = open(tex->file[i], O_RDONLY);
+        if (fd == -1)
+            ft_exit(0);
+        tex->img = mlx_xpm_file_to_image(mlx.pointer, tex->file[i], &tex->width, &tex->height);
+        tex->data[i] = (unsigned int *)mlx_get_data_addr(
+            tex->img,
             &mlx.bits_per_pixel,
             &mlx.line_length,
             &mlx.endian);
+        free(tex->img);
+        // for (int x = 0; x < 64 * 64; x++)
+        //     printf("[%d]%d\n", x, tex->data[i][x]);
+        i++;
     }
-    return tex;
+    return NULL;
 }

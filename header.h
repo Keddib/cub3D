@@ -34,13 +34,14 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void setup_player();
 void update_player();
 int is_this_wall(float x, float y);
-t_ray *cast_all_rays();
+void cast_all_rays();
 void render_ray(t_ray *ray);
 void *ft_free(char **s, int i);
 void get_horizontal(t_ray *ray, t_incept *incept);
 void get_vertical(t_ray *ray, t_incept *incept);
 float distance_between_points(float x1, float y1, float x2, float y2);
 void calc_distances(t_ray *ray, t_incept *incept);
-t_texture *load_images();
+void *load_images();
+void render_3d_projection(t_ray rays, t_texture *tex, int i);
 
 #endif
