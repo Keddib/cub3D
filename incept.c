@@ -26,7 +26,8 @@ void calc_distances(t_ray *ray, t_incept *incept)
 
 void h_until_wall(float n_x, float n_y, t_incept *incept, t_ray *ray)
 {
-    while (n_x >= 0 && n_x <= window.width && n_y >= 0 && n_y <= window.height)
+    while (n_x >= 0 && n_x <= (TILE_SIZE * window.num_rows) &&
+           n_y >= 0 && n_y <= (TILE_SIZE * window.num_cols))
     {
         incept->check_x = n_x;
         incept->check_y = n_y + (ray->ray_facingup ? -1 : 0);
@@ -48,7 +49,8 @@ void h_until_wall(float n_x, float n_y, t_incept *incept, t_ray *ray)
 
 void v_until_wall(float x, float y, t_incept *incept, t_ray *ray)
 {
-    while (x >= 0 && x <= window.width && y >= 0 && y <= window.height)
+    while (x >= 0 && x <= (TILE_SIZE * window.num_rows) &&
+           y >= 0 && y <= (TILE_SIZE * window.num_cols))
     {
         incept->check_x = x + (ray->ray_facingleft ? -1 : 0);
         incept->check_y = y;

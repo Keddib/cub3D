@@ -6,18 +6,11 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:25:11 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/17 01:58:06 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/20 11:14:17 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-int is_inside_grid(float x, float y)
-{
-    if (x >= 0 && x <= window.width && y >= 0 && y <= window.height)
-        return 1;
-    return 0;
-}
 
 float normalizeAngle(float angle)
 {

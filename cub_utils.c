@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/19 18:46:32 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/20 11:07:24 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int is_this_wall(float x, float y)
   index_y = floor(y / TILE_SIZE);
   if (index_y >= window.num_cols || index_x >= window.num_rows)
     return 1;
-
   if (window.array[index_y][index_x] == '1')
     return 1;
   return 0;

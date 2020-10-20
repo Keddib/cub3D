@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/19 20:56:29 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/20 11:26:01 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,25 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void render_walls(t_ray *ray, int i)
+void render_walls(t_ray *ray, int i, int ws_height)
 {
 	int start;
 	unsigned int color;
+	int offx;
+	int offy;
 
 	start = ray[i].wall_top;
-	// color = ray[i].was_hit_vertical ? 0xd3d3d3 : 0xffffff;
-	if (ray[i].was_hit_vertical)
-	{
-	}
-	else
-	{
-	}
 
-	int offx = ;
+	if (ray[i].was_hit_vertical)
+		offx = (int)ray[i].wall_hit_y % TILE_SIZE;
+	else
+		offx = (int)ray[i].wall_hit_x % TILE_SIZE;
+
 	while (start < ray[i].wall_bottom)
 	{
+		offy = (start - ((window.height / 2) - (ws_height / 2))) * ((float)TILE_SIZE / ws_height);
 		color = tex[(TILE_SIZE * offy) + offx];
+		// color = ray[i].was_hit_vertical ? 0xd3d3d3 : 0xffffff;
 		my_mlx_pixel_put(&mlx, i, start++, color);
 	}
 	start = 0;
@@ -68,7 +69,7 @@ void render_3d_projection(t_ray *rays)
 		rays[i].wall_bottom = (window.height / 2) + (wall_stripe_hieght / 2);
 		if (rays[i].wall_bottom > window.height)
 			rays[i].wall_bottom = window.height;
-		render_walls(rays, i++);
+		render_walls(rays, i++, wall_stripe_hieght);
 	}
 }
 
