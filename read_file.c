@@ -6,10 +6,22 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 09:45:37 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/19 18:43:44 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/21 19:44:45 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+int this file I read the map info from any afile must be .cub
+I have to initize these variebles :
+ - window.width
+ - window.height
+ - window.num_cols
+ - window.num_rows
+ - window.array
+ - player.x
+ - player.y
+ - player.rotation.angle
+*/
 #include "header.h"
 
 static void check_char(char c)
@@ -69,6 +81,18 @@ static int check_error()
     return (0);
 }
 
+// int check_line(char *line)
+// {
+//     int i = 0;
+//     while (line[i])
+//     {
+//         if (line[i] == ' ')
+//             i++;
+//         if (line[i] == 'R' && line[i + 1] == ' ')
+//             window.width = ft_atoi(line + i);
+//     }
+// }
+
 void read_file(char *path)
 {
     int fd;
@@ -83,6 +107,7 @@ void read_file(char *path)
     window.num_rows = 0;
     while (get_next_line(fd, &line))
     {
+        // check_line(line);
         if (line[0] == 'R')
         {
             window.width = ft_atoi(line + 1);
@@ -90,6 +115,8 @@ void read_file(char *path)
         }
         else if (line[0] == '1' || line[0] == ' ')
         {
+            if (line[0] == '\n')
+                ft_exit(2);
             window.num_rows = (ft_strlen(line) > window.num_rows) ? ft_strlen(line) - 1 : window.num_rows;
             strmap = ft_strjoin(strmap, line, 0);
         }
@@ -99,6 +126,8 @@ void read_file(char *path)
     }
     strmap = ft_strjoin(strmap, line, 0);
     window.array = ft_split(strmap, '\n');
+    for (int i = 0; i < window.num_cols; i++)
+        printf("%s\n", window.array[i]);
     free(line);
     free(strmap);
     check_error();

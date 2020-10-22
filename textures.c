@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 18:47:18 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 17:49:09 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/21 16:57:54 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void *load_images(t_texture *tex)
             &mlx.line_length,
             &mlx.endian);
         free(tex->img);
-        // for (int x = 0; x < 64 * 64; x++)
-        //     printf("[%d]%d\n", x, tex->data[i][x]);
         i++;
     }
     return NULL;

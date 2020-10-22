@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 13:53:14 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 17:50:47 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/21 18:23:21 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void render_walls(t_ray ray, int i, int ws_height, t_texture *tex)
         // printf("%d\n", *tex->data[0]);
         // printf("x = %d\n", (TILE_SIZE * offy) + offx);
         color = tex->data[2][(TILE_SIZE * offy) + offx];
+        // printf("%d\n", color);
         // color = ray.was_hit_vertical ? 0xd3d3d3 : 0xffffff;
         my_mlx_pixel_put(&mlx, i, start++, color);
     }

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 20:33:06 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/21 17:39:29 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ void ft_exit(int i)
   if (i == 0)
   {
     ft_free(window.array, window.num_cols);
-    mlx_destroy_window(mlx.pointer, mlx.window);
     free(mlx.image);
-    // free(mlx.window);
-    free(mlx.addr);
+    mlx_destroy_window(mlx.pointer, mlx.window);
+    // free(mlx.addr);
     // free(mlx.pointer);
     // mlx.image = NULL;
     // mlx.window = NULL;

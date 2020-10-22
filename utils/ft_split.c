@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 18:47:58 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/19 18:14:19 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/21 18:47:24 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ static int count_char(const char *s, char c)
 	int len;
 
 	len = 0;
+	// window.num_rows = 0;
 	while (s[len] != c && s[len])
 	{
 		len++;
+		// window.num_rows++;
 	}
 	return (len);
 }
