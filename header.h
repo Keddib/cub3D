@@ -23,7 +23,7 @@ int ft_atoi(const char *str);
 void *ft_memchr(const void *s, int c, size_t n);
 char *ft_strrchr(const char *str, int c);
 void ft_putstr(char *s);
-char **ft_split(char const *s, char c);
+char **ft_split(char const *s, char c, int *cols);
 void read_file(char *p);
 int key_pressed(int key, void *param);
 int key_released(int key, void *param);
