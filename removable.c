@@ -26,10 +26,10 @@ void map_render()
   int tile_y = 0;
   int color;
 
-  while (i < window.num_cols)
+  while (i < window.cols)
   {
     j = 0;
-    while (j < window.num_rows)
+    while (j < window.rows)
     {
       tile_x = j * TILE_SIZE;
       tile_y = i * TILE_SIZE;

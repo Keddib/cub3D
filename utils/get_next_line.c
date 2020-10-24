@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wolfey <wolfey@student.42.fr>              +#+  +:+       +#+        */
+/*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 15:50:47 by keddib            #+#    #+#             */
-/*   Updated: 2020/03/31 05:44:42 by wolfey           ###   ########.fr       */
+/*   Updated: 2020/10/24 23:35:35 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-static		int		bsave_ts(char **bsave, char **line, int fd)
+static int bsave_ts(char **bsave, char **line)
 {
 	char *p;
 	char *temp;
@@ -37,14 +37,14 @@ static		int		bsave_ts(char **bsave, char **line, int fd)
 	return (0);
 }
 
-int					get_next_line(int fd, char **line)
+int get_next_line(int fd, char **line)
 {
-	int				i;
-	char			*buff;
-	static char		*bsave;
+	int i;
+	char *buff;
+	static char *bsave;
 
 	*line = NULL;
-	if ((i = bsave_ts(&bsave, line, fd)) == 1)
+	if ((i = bsave_ts(&bsave, line)) == 1)
 		return (1);
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	while ((i = read(fd, buff, BUFFER_SIZE)) > 0)

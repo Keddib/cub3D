@@ -44,8 +44,8 @@ typedef struct s_win
 {
     float width;
     float height;
-    int num_rows;
-    int num_cols;
+    int rows;
+    int cols;
     char **array;
     char chr;
 } t_win;
@@ -86,7 +86,23 @@ typedef struct s_texture
     char *file[4];
     int width;
     int height;
+    int floor;
+    int ciel;
 } t_texture;
+
+typedef struct s_file
+{
+    int map_found;
+    int counter;
+    int r;
+    int no;
+    int so;
+    int we;
+    int ea;
+    int s;
+    int f;
+    int c;
+} t_file;
 
 t_win window;
 t_player player;

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 00:40:01 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/21 17:04:18 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/24 23:33:12 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int key_pressed(int key, void *param)
 {
-
+    param = NULL;
     if (key == 53)
         ft_exit(0);
     if (key == 13)
@@ -34,6 +34,7 @@ int key_pressed(int key, void *param)
 
 int key_released(int key, void *param)
 {
+    param = NULL;
     if (key == 13 || key == 1)
         player.walk_direction = 0;
     else if (key == 2 || key == 0)

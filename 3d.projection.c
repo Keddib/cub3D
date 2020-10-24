@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 13:53:14 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/21 18:23:21 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/25 00:12:29 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,29 @@ void render_walls(t_ray ray, int i, int ws_height, t_texture *tex)
     int offy;
 
     start = ray.wall_top;
-
     if (ray.was_hit_vertical)
         offx = (int)ray.wall_hit_y % TILE_SIZE;
     else
         offx = (int)ray.wall_hit_x % TILE_SIZE;
-
+    int wich_tex = 0;
+    if (ray.was_hit_vertical && ray.ray_facingright)
+        wich_tex = 3;
+    else if (ray.was_hit_vertical && ray.ray_facingleft)
+        wich_tex = 2;
+    else if (ray.was_hit_vertical == 0 && ray.ray_facingdown)
+        wich_tex = 1;
     while (start < ray.wall_bottom)
     {
         offy = (start - ((window.height / 2) - (ws_height / 2))) * ((float)TILE_SIZE / ws_height);
-        // printf("%d\n", *tex->data[0]);
-        // printf("x = %d\n", (TILE_SIZE * offy) + offx);
-        color = tex->data[2][(TILE_SIZE * offy) + offx];
-        // printf("%d\n", color);
-        // color = ray.was_hit_vertical ? 0xd3d3d3 : 0xffffff;
+        color = tex->data[wich_tex][(TILE_SIZE * offy) + offx];
         my_mlx_pixel_put(&mlx, i, start++, color);
     }
     start = 0;
     while (start < ray.wall_top)
-        my_mlx_pixel_put(&mlx, i, start++, 0x5cabf4);
+        my_mlx_pixel_put(&mlx, i, start++, tex->ciel);
     start = ray.wall_bottom;
     while (start < window.height)
-        my_mlx_pixel_put(&mlx, i, start++, 0xc58b00);
+        my_mlx_pixel_put(&mlx, i, start++, tex->floor);
 }
 
 void render_3d_projection(t_ray ray, t_texture *tex, int i)

@@ -12,7 +12,7 @@
 
 #include "header.h"
 
-void calc_distances(t_ray *ray, t_incept *incept)
+void calc_distances(t_incept *incept)
 {
     incept->horz_distance = incept->is_horz_hit
                                 ? distance_between_points(player.x, player.y,
@@ -26,8 +26,8 @@ void calc_distances(t_ray *ray, t_incept *incept)
 
 void h_until_wall(float n_x, float n_y, t_incept *incept, t_ray *ray)
 {
-    while (n_x >= 0 && n_x <= (TILE_SIZE * window.num_rows) &&
-           n_y >= 0 && n_y <= (TILE_SIZE * window.num_cols))
+    while (n_x >= 0 && n_x <= (TILE_SIZE * window.rows) &&
+           n_y >= 0 && n_y <= (TILE_SIZE * window.cols))
     {
         incept->check_x = n_x;
         incept->check_y = n_y + (ray->ray_facingup ? -1 : 0);
@@ -49,8 +49,8 @@ void h_until_wall(float n_x, float n_y, t_incept *incept, t_ray *ray)
 
 void v_until_wall(float x, float y, t_incept *incept, t_ray *ray)
 {
-    while (x >= 0 && x <= (TILE_SIZE * window.num_rows) &&
-           y >= 0 && y <= (TILE_SIZE * window.num_cols))
+    while (x >= 0 && x <= (TILE_SIZE * window.rows) &&
+           y >= 0 && y <= (TILE_SIZE * window.cols))
     {
         incept->check_x = x + (ray->ray_facingleft ? -1 : 0);
         incept->check_y = y;

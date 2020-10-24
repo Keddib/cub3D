@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:25:11 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/20 18:02:04 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/24 23:34:24 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void cast_ray(float ray_angle, t_ray *ray)
     get_horizontal(ray, &incept);
     get_vertical(ray, &incept);
     // Calculate both horizontal and vertical hit distances and choose the smallest one
-    calc_distances(ray, &incept);
+    calc_distances(&incept);
     if (incept.vert_distance < incept.horz_distance)
     {
         ray->distance = incept.vert_distance;

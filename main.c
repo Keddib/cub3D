@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/22 14:48:04 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/24 23:32:10 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ int update(t_texture *tex)
 	return 0;
 }
 
-int main()
+int main(int argc, char **argv)
 {
+	if (argc != 2)
+		ft_exit(2);
 	t_texture tex;
 	mlx.pointer = mlx_init();
-	read_file("map.cub");
+	read_file(argv[1], &tex);
 	load_images(&tex);
-
 	mlx.window = mlx_new_window(mlx.pointer, window.width, window.height, "Cub3d");
 	mlx.image = mlx_new_image(mlx.pointer, window.width, window.height);
 	mlx.addr = mlx_get_data_addr(mlx.image, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/21 17:39:29 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/24 19:42:01 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,34 @@ void update_player()
 
 int is_this_wall(float x, float y)
 {
-  if (x < 0 || x > (window.num_rows * TILE_SIZE) || y < 0 || y > (window.num_cols * TILE_SIZE))
+  if (x < 0 || x > (window.rows * TILE_SIZE) || y < 0 || y > (window.cols * TILE_SIZE))
     return 1;
   int index_x;
   int index_y;
   index_x = floor(x / TILE_SIZE);
   index_y = floor(y / TILE_SIZE);
-  if (index_y >= window.num_cols || index_x >= window.num_rows)
+  if (index_y >= window.cols || index_x >= window.rows)
     return 1;
   if (window.array[index_y][index_x] == '1')
     return 1;
   return 0;
 }
 
-void ft_exit(int i)
+int ft_puterror(char *error)
+{
+  char *e;
+  e = "\033[1;31m(x) Error\n >> \033[0;31m";
+  write(1, e, ft_strlen(e));
+  write(1, error, ft_strlen(error));
+  return 0;
+}
+
+int ft_exit(int i)
 {
   if (i == 0)
   {
-    ft_free(window.array, window.num_cols);
-    free(mlx.image);
+    ft_free(window.array, window.cols);
+    mlx_destroy_image(mlx.pointer, mlx.image);
     mlx_destroy_window(mlx.pointer, mlx.window);
     // free(mlx.addr);
     // free(mlx.pointer);
@@ -62,9 +71,10 @@ void ft_exit(int i)
     // mlx.pointer = NULL;
   }
   else if (i == 1)
-    ft_putstr("ERROR\nFILE NOT FOUND\n");
+    ft_puterror("ERROR\nFILE NOT FOUND\n");
+  // ft_putstr("ERROR\nFILE NOT FOUND\n");
   else if (i == 2)
-    ft_putstr("ERROR\nMAP INVALIDb\n");
+    ft_puterror("Somthing is Missing Check Your File\n");
   else if (i == 3)
     ft_putstr("ERROR\nDUPP PLAYER\n");
   exit(0);
