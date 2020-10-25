@@ -43,5 +43,7 @@ float distance_between_points(float x1, float y1, float x2, float y2);
 void calc_distances(t_incept *incept);
 void *load_images();
 void render_3d_projection(t_ray rays, t_texture *tex, int i);
+int change_rgb(char *s);
+int str_containe(char **s, int n);
 
 #endif

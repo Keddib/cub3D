@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 14:25:11 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/24 23:34:24 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/25 01:13:16 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,12 @@ void cast_all_rays(t_texture *tex)
     t_ray ray;
 
     i = 0;
-    ray_angle = player.rotation_angle - (FOV_ANGLE / 2);
-    while (i < window.width)
-
+    ray_angle = g_player.rotation_angle - (FOV_ANGLE / 2);
+    while (i < g_window.width)
     {
         cast_ray(ray_angle, &ray);
         render_3d_projection(ray, tex, i);
-        ray_angle += (FOV_ANGLE / window.width);
+        ray_angle += (FOV_ANGLE / g_window.width);
         i++;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/24 19:42:01 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/25 22:30:03 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,31 @@ void update_player()
   float move_step;
   float side_step;
 
-  player.rotation_angle += player.turn_direction * TURN_SPEED;
-  move_step = player.walk_direction * WALK_SPEED;
-  new_player_x = player.x + cos(player.rotation_angle) * move_step;
-  new_player_y = player.y + sin(player.rotation_angle) * move_step;
-  side_step = player.side_direction * WALK_SPEED;
-  new_player_x += cos(player.rotation_angle + (90 * RADIUN)) * side_step;
-  new_player_y += sin(player.rotation_angle + (90 * RADIUN)) * side_step;
+  g_player.rotation_angle += g_player.turn_direction * TURN_SPEED;
+  move_step = g_player.walk_direction * WALK_SPEED;
+  new_player_x = g_player.x + cos(g_player.rotation_angle) * move_step;
+  new_player_y = g_player.y + sin(g_player.rotation_angle) * move_step;
+  side_step = g_player.side_direction * WALK_SPEED;
+  new_player_x += cos(g_player.rotation_angle + (90 * RADIUN)) * side_step;
+  new_player_y += sin(g_player.rotation_angle + (90 * RADIUN)) * side_step;
   if (!is_this_wall(new_player_x, new_player_y))
   {
-    player.x = new_player_x;
-    player.y = new_player_y;
+    g_player.x = new_player_x;
+    g_player.y = new_player_y;
   }
 }
 
 int is_this_wall(float x, float y)
 {
-  if (x < 0 || x > (window.rows * TILE_SIZE) || y < 0 || y > (window.cols * TILE_SIZE))
+  if (x < 0 || x > (g_window.rows * TILE_SIZE) || y < 0 || y > (g_window.cols * TILE_SIZE))
     return 1;
   int index_x;
   int index_y;
   index_x = floor(x / TILE_SIZE);
   index_y = floor(y / TILE_SIZE);
-  if (index_y >= window.cols || index_x >= window.rows)
+  if (index_y >= g_window.cols || index_x >= g_window.rows)
     return 1;
-  if (window.array[index_y][index_x] == '1')
+  if (g_window.array[index_y][index_x] == '1')
     return 1;
   return 0;
 }
@@ -61,14 +61,12 @@ int ft_exit(int i)
 {
   if (i == 0)
   {
-    ft_free(window.array, window.cols);
+    ft_free(g_window.array, g_window.cols);
     mlx_destroy_image(mlx.pointer, mlx.image);
     mlx_destroy_window(mlx.pointer, mlx.window);
-    // free(mlx.addr);
-    // free(mlx.pointer);
-    // mlx.image = NULL;
-    // mlx.window = NULL;
-    // mlx.pointer = NULL;
+    mlx.image = NULL;
+    mlx.window = NULL;
+    mlx.pointer = NULL;
   }
   else if (i == 1)
     ft_puterror("ERROR\nFILE NOT FOUND\n");
@@ -78,4 +76,24 @@ int ft_exit(int i)
   else if (i == 3)
     ft_putstr("ERROR\nDUPP PLAYER\n");
   exit(0);
+}
+
+int ft_strcmp(const char *s1, const char *s2)
+{
+  size_t i;
+  unsigned char *s;
+  unsigned char *z;
+
+  s = (unsigned char *)s1;
+  z = (unsigned char *)s2;
+  if (!s1 && !s2)
+    return (0);
+  i = 0;
+  while (s[i] != '\0' || z[i] != '\0')
+  {
+    if (s[i] - z[i] != 0)
+      return (s[i] - z[i]);
+    i++;
+  }
+  return (*s1 - *s2);
 }

@@ -26,14 +26,14 @@ void map_render()
   int tile_y = 0;
   int color;
 
-  while (i < window.cols)
+  while (i < g_window.cols)
   {
     j = 0;
-    while (j < window.rows)
+    while (j < g_window.rows)
     {
       tile_x = j * TILE_SIZE;
       tile_y = i * TILE_SIZE;
-      color = window.array[i][j] == '1' ? 0xfff : 0x000;
+      color = g_window.array[i][j] == '1' ? 0xfff : 0x000;
       ft_square(tile_x, tile_y, color);
       j++;
     }
@@ -69,10 +69,10 @@ void render_player(int x, int y)
   my_mlx_pixel_put(&mlx, x, y, 0xffffff);
   draw_line(x,
             y,
-            x + (cos(player.rotation_angle) * 15),
-            y + (sin(player.rotation_angle) * 15));
+            x + (cos(g_player.rotation_angle) * 15),
+            y + (sin(g_player.rotation_angle) * 15));
 }
 void render_ray(t_ray *ray)
 {
-  draw_line(player.x, player.y, ray->wall_hit_x, ray->wall_hit_y);
+  draw_line(g_player.x, g_player.y, ray->wall_hit_x, ray->wall_hit_y);
 }

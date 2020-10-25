@@ -104,7 +104,7 @@ typedef struct s_file
     int c;
 } t_file;
 
-t_win window;
-t_player player;
+t_win g_window;
+t_player g_player;
 t_data mlx;
 #endif

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 13:53:14 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/25 00:12:29 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/25 00:26:07 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void render_walls(t_ray ray, int i, int ws_height, t_texture *tex)
         wich_tex = 1;
     while (start < ray.wall_bottom)
     {
-        offy = (start - ((window.height / 2) - (ws_height / 2))) * ((float)TILE_SIZE / ws_height);
+        offy = (start - ((g_window.height / 2) - (ws_height / 2))) * ((float)TILE_SIZE / ws_height);
         color = tex->data[wich_tex][(TILE_SIZE * offy) + offx];
         my_mlx_pixel_put(&mlx, i, start++, color);
     }
@@ -41,7 +41,7 @@ void render_walls(t_ray ray, int i, int ws_height, t_texture *tex)
     while (start < ray.wall_top)
         my_mlx_pixel_put(&mlx, i, start++, tex->ciel);
     start = ray.wall_bottom;
-    while (start < window.height)
+    while (start < g_window.height)
         my_mlx_pixel_put(&mlx, i, start++, tex->floor);
 }
 
@@ -52,14 +52,14 @@ void render_3d_projection(t_ray ray, t_texture *tex, int i)
     float distance_proj_plane;
 
     correct_distance =
-        ray.distance * cos(ray.ray_angle - player.rotation_angle);
-    distance_proj_plane = (window.width / 2) / tan(FOV_ANGLE / 2);
+        ray.distance * cos(ray.ray_angle - g_player.rotation_angle);
+    distance_proj_plane = (g_window.width / 2) / tan(FOV_ANGLE / 2);
     wall_stripe_hieght = (int)((TILE_SIZE / correct_distance) * distance_proj_plane);
-    ray.wall_top = (window.height / 2) - (wall_stripe_hieght / 2);
+    ray.wall_top = (g_window.height / 2) - (wall_stripe_hieght / 2);
     if (ray.wall_top < 0)
         ray.wall_top = 0;
-    ray.wall_bottom = (window.height / 2) + (wall_stripe_hieght / 2);
-    if (ray.wall_bottom > window.height)
-        ray.wall_bottom = window.height;
+    ray.wall_bottom = (g_window.height / 2) + (wall_stripe_hieght / 2);
+    if (ray.wall_bottom > g_window.height)
+        ray.wall_bottom = g_window.height;
     render_walls(ray, i, wall_stripe_hieght, tex);
 }

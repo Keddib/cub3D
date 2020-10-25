@@ -6,115 +6,59 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 09:45:37 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/24 23:41:35 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/25 23:31:48 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-int this file I read the map info from any afile must be .cub
+in this file I read the map info from any afile must be .cub
 I have to initize these variebles :
- - window.width XDONEX
- - window.height XDONEX
- - window.cols XDONEX
- - window.rows XDONEX
- - window.array XDONEX
- - player.x
- - player.y
- - player.rotation.angle
+ - g_window.width XDONEX
+ - g_window.height XDONEX
+ - g_window.cols XDONEX
+ - g_window.rows XDONEX
+ - g_window.array XDONEX
+ - g_player.x     XDONEX
+ - g_player.y     XDONEX
+ - g_player.rotation.angle XDONEX
 */
 #include "header.h"
-
-int change_rgb(char *s)
-{
-    char **lines;
-    int cols;
-    int color;
-    lines = ft_split(s, ',', &cols);
-    if (cols != 3)
-    {
-        ft_free(lines, cols);
-        ft_exit(2);
-    }
-    color = 65536 * ft_atoi(lines[0]) + 256 * ft_atoi(lines[1]);
-    color += ft_atoi(lines[2]);
-    ft_free(lines, cols);
-    return (color);
-}
-
-int str_containe(char **s, int n)
-{
-    int i;
-    int j;
-    int yes;
-
-    i = 0;
-    while (i < n)
-    {
-        j = 0;
-        while (s[i][j])
-        {
-            if (s[i][j] == '1' || s[i][j] == ' ' || s[i][j] == '\n')
-                yes = 1;
-            else
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (yes);
-}
-
-int ft_strcmp(const char *s1, const char *s2)
-{
-    size_t i;
-    unsigned char *s;
-    unsigned char *z;
-
-    s = (unsigned char *)s1;
-    z = (unsigned char *)s2;
-    if (!s1 && !s2)
-        return (0);
-    i = 0;
-    while (s[i] != '\0' || z[i] != '\0')
-    {
-        if (s[i] - z[i] != 0)
-            return (s[i] - z[i]);
-        i++;
-    }
-    return (*s1 - *s2);
-}
 
 static void check_char(char c)
 {
     if (c != '1' && c != '0' && c != '2' && c != 'W' &&
         c != 'N' && c != 'S' && c != 'E' && c != ' ')
         ft_exit(2);
-    if ((c == 'N' || c == 'W' || c == 'S' || c == 'E') && window.chr == 1)
+    if ((c == 'N' || c == 'W' || c == 'S' || c == 'E') && g_window.chr == 1)
         ft_exit(3);
     if (c == 'N' || c == 'W' || c == 'S' || c == 'E')
-        window.chr = 1;
+        g_window.chr = 1;
 }
 
 static void check_array(int j, int i)
 {
-    if (window.array[j][i] == 'N' || window.array[j][i] == 'W' ||
-        window.array[j][i] == 'E' || window.array[j][i] == 'S')
+    if (g_window.array[j][i] == 'N' || g_window.array[j][i] == 'W' ||
+        g_window.array[j][i] == 'E' || g_window.array[j][i] == 'S')
     {
-        player.x = i * TILE_SIZE;
-        player.y = j * TILE_SIZE;
-        if (window.array[j][i] == 'S')
-            player.rotation_angle = M_PI / 2;
-        else if (window.array[j][i] == 'N')
-            player.rotation_angle = M_PI * 1.5;
+        g_player.x = (i * TILE_SIZE) + (TILE_SIZE / 2);
+        g_player.y = (j * TILE_SIZE) + (TILE_SIZE / 2);
+        if (g_window.array[j][i] == 'S')
+            g_player.rotation_angle = M_PI / 2;
+        else if (g_window.array[j][i] == 'N')
+            g_player.rotation_angle = M_PI * 1.5;
+        else if (g_window.array[j][i] == 'E')
+            g_player.rotation_angle = M_PI * 0;
+        else if (g_window.array[j][i] == 'W')
+            g_player.rotation_angle = M_PI * 1;
     }
-    if (j == 0 || (j == window.cols - 1))
+    if (j == 0 || (j == g_window.cols - 1))
         ft_exit(2);
-    else if (i == (window.rows - 1))
+    else if (i == (g_window.rows - 1))
         ft_exit(2);
-    else if (window.array[j + 1][i] == ' ' || window.array[j - 1][i] == ' ')
+    else if (g_window.array[j + 1][i] == ' ' || g_window.array[j - 1][i] == ' ')
 
         ft_exit(2);
-    else if (window.array[j][i + 1] == ' ' || window.array[j][i - 1] == ' ')
+    else if (g_window.array[j][i + 1] == ' ' || g_window.array[j][i - 1] == ' ')
         ft_exit(2);
 }
 
@@ -124,16 +68,17 @@ static int check_error()
     int j;
 
     j = 0;
-    while (window.array[j])
+    g_window.chr = 0;
+    while (g_window.array[j])
     {
         i = 0;
-        while (window.array[j][i])
+        while (g_window.array[j][i])
         {
-            if (window.array[j][i] == '0' || window.array[j][i] == 'N' ||
-                window.array[j][i] == 'W' || window.array[j][i] == '2' ||
-                window.array[j][i] == 'E' || window.array[j][i] == 'S')
+            if (g_window.array[j][i] == '0' || g_window.array[j][i] == 'N' ||
+                g_window.array[j][i] == 'W' || g_window.array[j][i] == '2' ||
+                g_window.array[j][i] == 'E' || g_window.array[j][i] == 'S')
                 check_array(j, i);
-            check_char(window.array[j][i]);
+            check_char(g_window.array[j][i]);
             i++;
         }
         j++;
@@ -177,8 +122,8 @@ int check_line(char *line, t_file *elems, t_texture *tex)
     {
         if (cols > 3 || cols < 3 || elems->r == 1)
             ft_exit(2);
-        window.width = ft_atoi(splited_line[1]);
-        window.height = ft_atoi(splited_line[2]);
+        g_window.width = ft_atoi(splited_line[1]);
+        g_window.height = ft_atoi(splited_line[2]);
         elems->counter += 1;
         elems->r = 1;
     }
@@ -266,10 +211,10 @@ void read_file(char *path, t_texture *tex)
     elems.we = 0;
     strmap = NULL;
     fd = open(path, O_RDONLY);
-    window.chr = 0;
+    g_window.chr = 0;
     if (fd == -1)
         ft_exit(1);
-    window.rows = 0;
+    g_window.rows = 0;
     while (get_next_line(fd, &line))
     {
         if (elems.map_found == 0)
@@ -288,7 +233,7 @@ void read_file(char *path, t_texture *tex)
                 ft_exit(2);
                 free(line);
             }
-            window.rows = (len > window.rows) ? len - 1 : window.rows;
+            g_window.rows = (len > g_window.rows) ? len - 1 : g_window.rows;
             strmap = ft_strjoin(strmap, line, 0);
         }
         free(line);
@@ -297,7 +242,9 @@ void read_file(char *path, t_texture *tex)
         ft_exit(2);
     strmap = ft_strjoin(strmap, line, 0);
     free(line);
-    window.array = ft_split(strmap, '\n', &window.cols);
+    g_window.array = ft_split(strmap, '\n', &g_window.cols);
     free(strmap);
     check_error();
+    if (g_window.chr == 0)
+        ft_exit(2);
 }
