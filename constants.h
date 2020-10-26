@@ -48,6 +48,8 @@ typedef struct s_win
     int cols;
     char **array;
     char chr;
+    float half_win;
+    float look;
 } t_win;
 
 typedef struct s_player

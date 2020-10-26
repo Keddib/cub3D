@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/25 23:31:52 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/26 01:23:17 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int main(int argc, char **argv)
 	t_texture tex;
 	mlx.pointer = mlx_init();
 	read_file(argv[1], &tex);
+	g_window.half_win = (g_window.height / 2);
+	g_window.look = 0;
 	load_images(&tex);
 	mlx.window = mlx_new_window(
 		mlx.pointer,

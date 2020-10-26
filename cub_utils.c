@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/25 22:30:03 by keddib           ###   ########.fr       */
+/*   Updated: 2020/10/26 01:33:05 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void update_player()
   float new_player_y;
   float move_step;
   float side_step;
+  float nex_half = g_window.half_win + (g_window.look * 5);
 
+  if (nex_half > (g_window.height / 4) && nex_half < ((g_window.height / 4) * 3))
+    g_window.half_win += (g_window.look * 5);
   g_player.rotation_angle += g_player.turn_direction * TURN_SPEED;
   move_step = g_player.walk_direction * WALK_SPEED;
   new_player_x = g_player.x + cos(g_player.rotation_angle) * move_step;
