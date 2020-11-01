@@ -1,131 +1,131 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   incept->c                                           :+:      :+:    :+:   */
+/*   incept.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 23:11:43 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/17 01:04:46 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/01 23:36:51 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void calc_distances(t_incept *incept)
+void calc_distances(t_all *all)
 {
-    incept->horz_distance = incept->is_horz_hit
-                                ? distance_between_points(g_player.x, g_player.y,
-                                                          incept->horz_x, incept->horz_y)
-                                : (float)INT_MAX;
-    incept->vert_distance = incept->is_vert_hit
-                                ? distance_between_points(g_player.x, g_player.y,
-                                                          incept->vert_x, incept->vert_y)
-                                : (float)INT_MAX;
+    all->incept.horz_distance = all->incept.is_horz_hit
+                                    ? distance_between_points(all->fpp.x, all->fpp.y,
+                                                              all->incept.horz_x, all->incept.horz_y)
+                                    : (float)INT_MAX;
+    all->incept.vert_distance = all->incept.is_vert_hit
+                                    ? distance_between_points(all->fpp.x, all->fpp.y,
+                                                              all->incept.vert_x, all->incept.vert_y)
+                                    : (float)INT_MAX;
 }
 
-void h_until_wall(float n_x, float n_y, t_incept *incept, t_ray *ray)
+void h_until_wall(float n_x, float n_y, t_all *all, int i)
 {
-    while (n_x >= 0 && n_x <= (TILE_SIZE * g_window.rows) &&
-           n_y >= 0 && n_y <= (TILE_SIZE * g_window.cols))
+    while (n_x >= 0 && n_x <= (TILE_SIZE * all->win.rows) &&
+           n_y >= 0 && n_y <= (TILE_SIZE * all->win.cols))
     {
-        incept->check_x = n_x;
-        incept->check_y = n_y + (ray->ray_facingup ? -1 : 0);
+        all->incept.check_x = n_x;
+        all->incept.check_y = n_y + (all->ray[i].ray_facingup ? -1 : 0);
 
-        if (is_this_wall(incept->check_x, incept->check_y))
+        if (is_this_wall(all->incept.check_x, all->incept.check_y, all))
         {
-            incept->horz_x = n_x;
-            incept->horz_y = n_y;
-            incept->is_horz_hit = 1;
+            all->incept.horz_x = n_x;
+            all->incept.horz_y = n_y;
+            all->incept.is_horz_hit = 1;
             break;
         }
         else
         {
-            n_x += incept->xstep;
-            n_y += incept->ystep;
+            n_x += all->incept.xstep;
+            n_y += all->incept.ystep;
         }
     }
 }
 
-void v_until_wall(float x, float y, t_incept *incept, t_ray *ray)
+void v_until_wall(float x, float y, t_all *all, int i)
 {
-    while (x >= 0 && x <= (TILE_SIZE * g_window.rows) &&
-           y >= 0 && y <= (TILE_SIZE * g_window.cols))
+    while (x >= 0 && x <= (TILE_SIZE * all->win.rows) &&
+           y >= 0 && y <= (TILE_SIZE * all->win.cols))
     {
-        incept->check_x = x + (ray->ray_facingleft ? -1 : 0);
-        incept->check_y = y;
-        if (is_this_wall(incept->check_x, incept->check_y))
+        all->incept.check_x = x + (all->ray[i].ray_facingleft ? -1 : 0);
+        all->incept.check_y = y;
+        if (is_this_wall(all->incept.check_x, all->incept.check_y, all))
         {
-            incept->vert_x = x;
-            incept->vert_y = y;
-            incept->is_vert_hit = 1;
+            all->incept.vert_x = x;
+            all->incept.vert_y = y;
+            all->incept.is_vert_hit = 1;
             break;
         }
         else
         {
-            x += incept->xstep;
-            y += incept->ystep;
+            x += all->incept.xstep;
+            y += all->incept.ystep;
         }
     }
 }
 // Find the y-coordinate of the closest horizontal grid intersection
 // Find the x-coordinate of the closest horizontal grid intersection
-// Calculate the increment incept->xstep and incept->ystep
-// Increment incept->xstep and incept->ystep until we find a wall
+// Calculate the increment all->incept.xstep and all->incept.ystep
+// Increment all->incept.xstep and all->incept.ystep until we find a wall
 
-void get_horizontal(t_ray *ray, t_incept *incept)
+void get_horizontal(t_all *all, int i)
 {
     float next_x;
     float next_y;
 
-    incept->is_horz_hit = 0;
-    incept->horz_x = 0;
-    incept->horz_y = 0;
+    all->incept.is_horz_hit = 0;
+    all->incept.horz_x = 0;
+    all->incept.horz_y = 0;
 
-    incept->yintercept = floor(g_player.y / TILE_SIZE) *
-                         TILE_SIZE;
-    incept->yintercept += ray->ray_facingdown ? TILE_SIZE : 0;
+    all->incept.yintercept = floor(all->fpp.y / TILE_SIZE) *
+                             TILE_SIZE;
+    all->incept.yintercept += all->ray[i].ray_facingdown ? TILE_SIZE : 0;
 
-    incept->xintercept = g_player.x +
-                         (incept->yintercept - g_player.y) / tan(ray->ray_angle);
-    incept->ystep = TILE_SIZE;
-    incept->ystep *= ray->ray_facingup ? -1 : 1;
-    incept->xstep = TILE_SIZE / tan(ray->ray_angle);
-    incept->xstep *= (ray->ray_facingleft && incept->xstep > 0) ? -1 : 1;
-    incept->xstep *= (ray->ray_facingright && incept->xstep < 0) ? -1 : 1;
-    next_x = incept->xintercept;
-    next_y = incept->yintercept;
+    all->incept.xintercept = all->fpp.x +
+                             (all->incept.yintercept - all->fpp.y) / tan(all->ray[i].ray_angle);
+    all->incept.ystep = TILE_SIZE;
+    all->incept.ystep *= all->ray[i].ray_facingup ? -1 : 1;
+    all->incept.xstep = TILE_SIZE / tan(all->ray[i].ray_angle);
+    all->incept.xstep *= (all->ray[i].ray_facingleft && all->incept.xstep > 0) ? -1 : 1;
+    all->incept.xstep *= (all->ray[i].ray_facingright && all->incept.xstep < 0) ? -1 : 1;
+    next_x = all->incept.xintercept;
+    next_y = all->incept.yintercept;
 
-    h_until_wall(next_x, next_y, incept, ray);
+    h_until_wall(next_x, next_y, all, i);
 }
 // Find the x-coordinate of the closest vertical grid intersection
 // Find the y-coordinate of the closest vertical grid intersection
-// Calculate the increment incept->xstep and incept->ystep
-// Increment incept->xstep and incept->ystep until we find a wall
+// Calculate the increment all->incept.xstep and all->incept.ystep
+// Increment all->incept.xstep and all->incept.ystep until we find a wall
 
-void get_vertical(t_ray *ray, t_incept *incept)
+void get_vertical(t_all *all, int i)
 {
     float next_x;
     float next_y;
 
-    incept->is_vert_hit = 0;
-    incept->vert_x = 0;
-    incept->vert_y = 0;
+    all->incept.is_vert_hit = 0;
+    all->incept.vert_x = 0;
+    all->incept.vert_y = 0;
 
-    incept->xintercept = floor(g_player.x / TILE_SIZE) *
-                         TILE_SIZE;
-    incept->xintercept += ray->ray_facingright ? TILE_SIZE : 0;
+    all->incept.xintercept = floor(all->fpp.x / TILE_SIZE) *
+                             TILE_SIZE;
+    all->incept.xintercept += all->ray[i].ray_facingright ? TILE_SIZE : 0;
 
-    incept->yintercept = g_player.y +
-                         (incept->xintercept - g_player.x) * tan(ray->ray_angle);
+    all->incept.yintercept = all->fpp.y +
+                             (all->incept.xintercept - all->fpp.x) * tan(all->ray[i].ray_angle);
 
-    incept->xstep = TILE_SIZE;
-    incept->xstep *= ray->ray_facingleft ? -1 : 1;
-    incept->ystep = TILE_SIZE * tan(ray->ray_angle);
-    incept->ystep *= (ray->ray_facingup && incept->ystep > 0) ? -1 : 1;
-    incept->ystep *= (ray->ray_facingdown && incept->ystep < 0) ? -1 : 1;
-    next_x = incept->xintercept;
-    next_y = incept->yintercept;
+    all->incept.xstep = TILE_SIZE;
+    all->incept.xstep *= all->ray[i].ray_facingleft ? -1 : 1;
+    all->incept.ystep = TILE_SIZE * tan(all->ray[i].ray_angle);
+    all->incept.ystep *= (all->ray[i].ray_facingup && all->incept.ystep > 0) ? -1 : 1;
+    all->incept.ystep *= (all->ray[i].ray_facingdown && all->incept.ystep < 0) ? -1 : 1;
+    next_x = all->incept.xintercept;
+    next_y = all->incept.yintercept;
 
-    v_until_wall(next_x, next_y, incept, ray);
+    v_until_wall(next_x, next_y, all, i);
 }

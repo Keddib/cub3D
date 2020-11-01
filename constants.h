@@ -44,12 +44,13 @@ typedef struct s_win
 {
     float width;
     float height;
+    float half_win;
+    float look;
+    float proj_plane;
     int rows;
     int cols;
     char **array;
     char chr;
-    float half_win;
-    float look;
 } t_win;
 
 typedef struct s_player
@@ -106,7 +107,15 @@ typedef struct s_file
     int c;
 } t_file;
 
-t_win g_window;
-t_player g_player;
-t_data mlx;
+typedef struct s_all
+{
+    t_win win;
+    t_player fpp;
+    t_data mlx;
+    t_file file;
+    t_texture tex;
+    t_incept incept;
+    t_ray *ray;
+} t_all;
+
 #endif

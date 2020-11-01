@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 18:47:18 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/25 22:27:09 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/01 23:40:52 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int str_containe(char **s, int n)
     return (yes);
 }
 
-int change_rgb(char *s)
+int change_rgb(char *s, t_all *all)
 {
     char **lines;
     int cols;
@@ -44,7 +44,7 @@ int change_rgb(char *s)
     if (cols != 3)
     {
         ft_free(lines, cols);
-        ft_exit(2);
+        ft_exit(2, all);
     }
     color = 65536 * ft_atoi(lines[0]) + 256 * ft_atoi(lines[1]);
     color += ft_atoi(lines[2]);
@@ -52,25 +52,25 @@ int change_rgb(char *s)
     return (color);
 }
 
-void *load_images(t_texture *tex)
+void *load_images(t_all *all)
 {
     int fd, i;
     i = 0;
     fd = 0;
     while (i < 4)
     {
-        fd = open(tex->file[i], O_RDONLY);
+        fd = open(all->tex.file[i], O_RDONLY);
         if (fd == -1)
         {
-            ft_exit(2);
+            ft_exit(2, all);
         }
-        tex->img = mlx_xpm_file_to_image(mlx.pointer, tex->file[i], &tex->width, &tex->height);
-        tex->data[i] = (unsigned int *)mlx_get_data_addr(
-            tex->img,
-            &mlx.bits_per_pixel,
-            &mlx.line_length,
-            &mlx.endian);
-        free(tex->img);
+        all->tex.img = mlx_xpm_file_to_image(all->mlx.pointer, all->tex.file[i], &all->tex.width, &all->tex.height);
+        all->tex.data[i] = (unsigned int *)mlx_get_data_addr(
+            all->tex.img,
+            &all->mlx.bits_per_pixel,
+            &all->mlx.line_length,
+            &all->mlx.endian);
+        free(all->tex.img);
         i++;
     }
     return NULL;

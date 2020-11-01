@@ -6,47 +6,47 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/26 01:33:05 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/01 23:49:36 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void update_player()
+void update_player(t_all *all)
 {
   float new_player_x;
   float new_player_y;
   float move_step;
   float side_step;
-  float nex_half = g_window.half_win + (g_window.look * 5);
+  float nex_half = all->win.half_win + (all->win.look * 5);
 
-  if (nex_half > (g_window.height / 4) && nex_half < ((g_window.height / 4) * 3))
-    g_window.half_win += (g_window.look * 5);
-  g_player.rotation_angle += g_player.turn_direction * TURN_SPEED;
-  move_step = g_player.walk_direction * WALK_SPEED;
-  new_player_x = g_player.x + cos(g_player.rotation_angle) * move_step;
-  new_player_y = g_player.y + sin(g_player.rotation_angle) * move_step;
-  side_step = g_player.side_direction * WALK_SPEED;
-  new_player_x += cos(g_player.rotation_angle + (90 * RADIUN)) * side_step;
-  new_player_y += sin(g_player.rotation_angle + (90 * RADIUN)) * side_step;
-  if (!is_this_wall(new_player_x, new_player_y))
+  if (nex_half > (all->win.height / 4) && nex_half < ((all->win.height / 4) * 3))
+    all->win.half_win += (all->win.look * 5);
+  all->fpp.rotation_angle += all->fpp.turn_direction * TURN_SPEED;
+  move_step = all->fpp.walk_direction * WALK_SPEED;
+  new_player_x = all->fpp.x + cos(all->fpp.rotation_angle) * move_step;
+  new_player_y = all->fpp.y + sin(all->fpp.rotation_angle) * move_step;
+  side_step = all->fpp.side_direction * WALK_SPEED;
+  new_player_x += cos(all->fpp.rotation_angle + (90 * RADIUN)) * side_step;
+  new_player_y += sin(all->fpp.rotation_angle + (90 * RADIUN)) * side_step;
+  if (!is_this_wall(new_player_x, new_player_y, all))
   {
-    g_player.x = new_player_x;
-    g_player.y = new_player_y;
+    all->fpp.x = new_player_x;
+    all->fpp.y = new_player_y;
   }
 }
 
-int is_this_wall(float x, float y)
+int is_this_wall(float x, float y, t_all *all)
 {
-  if (x < 0 || x > (g_window.rows * TILE_SIZE) || y < 0 || y > (g_window.cols * TILE_SIZE))
+  if (x < 0 || x > (all->win.rows * TILE_SIZE) || y < 0 || y > (all->win.cols * TILE_SIZE))
     return 1;
   int index_x;
   int index_y;
   index_x = floor(x / TILE_SIZE);
   index_y = floor(y / TILE_SIZE);
-  if (index_y >= g_window.cols || index_x >= g_window.rows)
+  if (index_y >= all->win.cols || index_x >= all->win.rows)
     return 1;
-  if (g_window.array[index_y][index_x] == '1')
+  if (all->win.array[index_y][index_x] == '1')
     return 1;
   return 0;
 }
@@ -60,16 +60,16 @@ int ft_puterror(char *error)
   return 0;
 }
 
-int ft_exit(int i)
+int ft_exit(int i, t_all *all)
 {
   if (i == 0)
   {
-    ft_free(g_window.array, g_window.cols);
-    mlx_destroy_image(mlx.pointer, mlx.image);
-    mlx_destroy_window(mlx.pointer, mlx.window);
-    mlx.image = NULL;
-    mlx.window = NULL;
-    mlx.pointer = NULL;
+    ft_free(all->win.array, all->win.cols);
+    mlx_destroy_image(all->mlx.pointer, all->mlx.image);
+    mlx_destroy_window(all->mlx.pointer, all->mlx.window);
+    // free(all->ray);
+    for (int i = 0; i < 4; i++)
+      free(all->tex.data[i]);
   }
   else if (i == 1)
     ft_puterror("ERROR\nFILE NOT FOUND\n");
