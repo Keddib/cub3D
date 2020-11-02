@@ -6,13 +6,13 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 15:50:26 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/10 20:47:23 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/02 02:21:14 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-size_t ft_strlen(const char *s)
+size_t		ft_strlen(const char *s)
 {
 	int i;
 
@@ -22,7 +22,7 @@ size_t ft_strlen(const char *s)
 	return (i);
 }
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char		*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char *sub;
 
@@ -42,11 +42,11 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-char *ft_strdup(const char *s1)
+char		*ft_strdup(const char *s1)
 {
-	char *cpy;
-	int len;
-	int i;
+	char	*cpy;
+	int		len;
+	int		i;
 
 	len = ft_strlen(s1);
 	cpy = malloc(sizeof(char) * len + 1);
@@ -62,11 +62,11 @@ char *ft_strdup(const char *s1)
 	return (cpy);
 }
 
-char *ft_strjoin(char const *s1, char const *s2, int z)
+char		*ft_strjoin(char const *s1, char const *s2, int z)
 {
-	char *result;
-	size_t i;
-	size_t j;
+	char	*result;
+	size_t	i;
+	size_t	j;
 
 	if (s1 == NULL)
 		s1 = ft_strdup("");
@@ -91,7 +91,7 @@ char *ft_strjoin(char const *s1, char const *s2, int z)
 	return ((char *)result);
 }
 
-size_t ft_strlcpy(char *dst, const char *src, size_t size)
+size_t		ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t i;
 

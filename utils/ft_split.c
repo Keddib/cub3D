@@ -6,13 +6,13 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 18:47:58 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/23 19:16:22 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/02 02:22:49 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-static int count_words(const char *s, char c, int *cols)
+static int		count_words(const char *s, char c, int *cols)
 {
 	int i;
 	int inw;
@@ -41,7 +41,7 @@ static int count_words(const char *s, char c, int *cols)
 	return (ls);
 }
 
-static int count_char(const char *s, char c)
+static int		count_char(const char *s, char c)
 {
 	int len;
 
@@ -53,7 +53,7 @@ static int count_char(const char *s, char c)
 	return (len);
 }
 
-void *ft_free(char **s, int i)
+void			*ft_free(char **s, int i)
 {
 	while (i >= 0)
 	{
@@ -64,12 +64,12 @@ void *ft_free(char **s, int i)
 	return (NULL);
 }
 
-char **ft_split(char const *s, char c, int *cols)
+char			**ft_split(char const *s, char c, int *cols)
 {
-	char **arr;
-	int p;
-	int i;
-	int j;
+	char	**arr;
+	int		p;
+	int		i;
+	int		j;
 
 	if (!s)
 		return (NULL);

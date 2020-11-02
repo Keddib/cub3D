@@ -6,16 +6,16 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 09:50:28 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/10 20:53:27 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/02 02:24:50 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-void *ft_memchr(const void *s, int c, size_t n)
+void		*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t i;
-	unsigned char *s1;
+	size_t			i;
+	unsigned char	*s1;
 
 	s1 = (unsigned char *)s;
 	i = 0;
@@ -27,7 +27,8 @@ void *ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-int ft_atoi(const char *str)
+
+int			ft_atoi(const char *str)
 {
 	int i;
 	int p;
@@ -51,7 +52,8 @@ int ft_atoi(const char *str)
 	}
 	return (r * p);
 }
-char *ft_strrchr(const char *str, int c)
+
+char		*ft_strrchr(const char *str, int c)
 {
 	int i;
 
@@ -65,7 +67,7 @@ char *ft_strrchr(const char *str, int c)
 	return (NULL);
 }
 
-size_t ft_len(char *s, char c)
+size_t		ft_len(char *s, char c)
 {
 	int i;
 
@@ -81,7 +83,7 @@ size_t ft_len(char *s, char c)
 	return (i);
 }
 
-void ft_putstr(char *s)
+void		ft_putstr(char *s)
 {
 	if (s)
 		write(1, s, ft_strlen(s));

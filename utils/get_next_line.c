@@ -6,13 +6,13 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 15:50:47 by keddib            #+#    #+#             */
-/*   Updated: 2020/10/24 23:35:35 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/02 02:27:11 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-static int bsave_ts(char **bsave, char **line)
+static int	bsave_ts(char **bsave, char **line)
 {
 	char *p;
 	char *temp;
@@ -37,10 +37,10 @@ static int bsave_ts(char **bsave, char **line)
 	return (0);
 }
 
-int get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
-	int i;
-	char *buff;
+	int			i;
+	char		*buff;
 	static char *bsave;
 
 	*line = NULL;
@@ -52,7 +52,8 @@ int get_next_line(int fd, char **line)
 		buff[i] = 0x00;
 		if ((bsave = ft_memchr(buff, '\n', BUFFER_SIZE)))
 		{
-			*line = ft_strjoin(*line, ft_substr(buff, 0, (bsave + 1) - buff), 1);
+			*line = ft_strjoin(*line,
+					ft_substr(buff, 0, (bsave + 1) - buff), 1);
 			bsave = ft_substr(buff, bsave - buff, i);
 			free(buff);
 			return (1);

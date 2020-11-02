@@ -6,7 +6,7 @@
 #    By: keddib <keddib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/24 23:20:45 by keddib            #+#    #+#              #
-#    Updated: 2020/11/02 00:18:05 by keddib           ###   ########.fr        #
+#    Updated: 2020/11/02 01:07:09 by keddib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,10 @@ FLAGS =  -lmlx -framework OpenGL -framework AppKit -lm
 GO = gcc -Wall -Werror -Wextra
 
 all:
-	@$(GO)  $(SRC) -o cub3d $(PATH) $(FLAGS)
+	@$(GO) $(SRC) -o cub3d $(PATH) $(FLAGS)
 
 clean:
-	@rm -rf cub3d
+	@rm -rf cub3d cub3d.dSYM
 
 fclean: clean
 	@rm -rf cud3d
