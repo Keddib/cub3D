@@ -60,13 +60,11 @@ void	*load_images(t_all *all)
 
 	i = 0;
 	fd = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		fd = open(all->tex.file[i], O_RDONLY);
 		if (fd == -1)
-		{
 			ft_exit(2, all);
-		}
 		all->tex.img = mlx_xpm_file_to_image(all->mlx.pointer,
 				all->tex.file[i], &all->tex.width, &all->tex.height);
 		all->tex.data[i] = (unsigned int *)mlx_get_data_addr(

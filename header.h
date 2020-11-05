@@ -28,12 +28,10 @@ void read_file(char *p, t_all *all);
 int key_pressed(int key, t_all *all);
 int key_released(int key, t_all *all);
 int ft_exit(int i, t_all *all);
-void map_render();
 void render_player(int x, int y);
 void my_mlx_pixel_put(t_all *all, int x, int y, int color);
-void setup_player();
-void update_player();
-int is_this_wall(float x, float y, t_all *all);
+void update_player(t_all *all);
+int is_this_wall(float x, float y, t_all *all, int q);
 void cast_all_rays(t_all *all);
 void render_ray(t_ray *ray);
 void *ft_free(char **s, int i);
@@ -45,5 +43,10 @@ void *load_images(t_all *all);
 void render_3d_projection(t_all *all);
 int change_rgb(char *s, t_all *all);
 int str_containe(char **s, int n);
+void find_sprite(t_all *all);
+float 	sprite_dis_to_fpp(t_all *all, float x, float y);
+void	ft_sprites(t_all *all);
+float normlize_angle(float angle);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

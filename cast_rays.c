@@ -12,7 +12,7 @@
 
 #include "header.h"
 
-float normalizeAngle(float angle)
+float normlize_angle(float angle)
 {
     angle = remainder(angle, TWO_PI);
     if (angle < 0)
@@ -28,7 +28,7 @@ float distance_between_points(float x1, float y1, float x2, float y2)
 
 void cast_ray(float ray_angle, t_all *all, int i)
 {
-    all->ray[i].ray_angle = normalizeAngle(ray_angle);
+    all->ray[i].ray_angle = normlize_angle(ray_angle);
     all->ray[i].ray_facingdown = all->ray[i].ray_angle > 0 && all->ray[i].ray_angle < PI;
     all->ray[i].ray_facingup = !all->ray[i].ray_facingdown;
     all->ray[i].ray_facingright = all->ray[i].ray_angle < 0.5 * PI || all->ray[i].ray_angle > 1.5 * PI;
@@ -62,7 +62,7 @@ void cast_all_rays(t_all *all)
     i = 0;
     num_rays = all->win.width;
     // ray_angle = all->fpp.rotation_angle - (FOV_ANGLE / 2);
-    while (i < all->win.width)
+    while (i < num_rays)
     {
         ray_angle = all->fpp.rotation_angle +
                     atan((i - num_rays / 2) / all->win.proj_plane);

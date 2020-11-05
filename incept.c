@@ -36,7 +36,7 @@ void	h_until_wall(float n_x, float n_y, t_all *all, int i)
 	{
 		all->incept.check_x = n_x;
 		all->incept.check_y = n_y + (all->ray[i].ray_facingup ? -1 : 0);
-		if (is_this_wall(all->incept.check_x, all->incept.check_y, all))
+		if (is_this_wall(all->incept.check_x, all->incept.check_y, all, 1))
 		{
 			all->incept.horz_x = n_x;
 			all->incept.horz_y = n_y;
@@ -58,7 +58,7 @@ void	v_until_wall(float x, float y, t_all *all, int i)
 	{
 		all->incept.check_x = x + (all->ray[i].ray_facingleft ? -1 : 0);
 		all->incept.check_y = y;
-		if (is_this_wall(all->incept.check_x, all->incept.check_y, all))
+		if (is_this_wall(all->incept.check_x, all->incept.check_y, all, 1))
 		{
 			all->incept.vert_x = x;
 			all->incept.vert_y = y;

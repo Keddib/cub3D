@@ -85,8 +85,8 @@ typedef struct s_incept
 typedef struct s_texture
 {
     void *img;
-    unsigned int *data[4];
-    char *file[4];
+    unsigned int *data[5];
+    char *file[5];
     int width;
     int height;
     int floor;
@@ -107,6 +107,18 @@ typedef struct s_file
     int c;
 } t_file;
 
+typedef struct s_sprite
+{
+    float x;
+    float y;
+    float angle;
+    float distance;
+    float size;
+    int offx;
+    int offy;
+} t_sprite;
+
+
 typedef struct s_all
 {
     t_win win;
@@ -116,6 +128,8 @@ typedef struct s_all
     t_texture tex;
     t_incept incept;
     t_ray *ray;
+    t_sprite *sprite;
+    int num_sprt;
 } t_all;
 
 #endif

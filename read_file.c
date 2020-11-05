@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 09:45:37 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/02 00:10:53 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/02 04:12:30 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void check_array(int j, int i, t_all *all)
         else if (all->win.array[j][i] == 'W')
             all->fpp.rotation_angle = M_PI * 1;
     }
+    if (all->win.array[j][i] == '2')
+        all->num_sprt += 1;
     if (j == 0 || (j == all->win.cols - 1))
         ft_exit(2, all);
     else if (i == (all->win.rows - 1))
@@ -118,7 +120,7 @@ int check_line(char *line, t_all *all)
     if (line[0] == '\n')
         return 0;
     splited_line = ft_split(line, ' ', &cols);
-    if (strcmp(splited_line[0], "R") == 0)
+    if (ft_strcmp(splited_line[0], "R") == 0)
     {
         if (cols > 3 || cols < 3 || all->file.r == 1)
             ft_exit(2, all);
@@ -129,7 +131,7 @@ int check_line(char *line, t_all *all)
     }
     else if ((cols > 2 || cols < 2) && !str_containe(splited_line, cols))
         ft_exit(2, all);
-    else if (strcmp(splited_line[0], "NO") == 0)
+    else if (ft_strcmp(splited_line[0], "NO") == 0)
     {
         if (all->file.no == 1)
             ft_exit(2, all);
@@ -137,7 +139,7 @@ int check_line(char *line, t_all *all)
         all->file.counter += 1;
         all->file.no = 1;
     }
-    else if (strcmp(splited_line[0], "SO") == 0)
+    else if (ft_strcmp(splited_line[0], "SO") == 0)
     {
         if (all->file.so == 1)
             ft_exit(2, all);
@@ -145,7 +147,7 @@ int check_line(char *line, t_all *all)
         all->file.counter += 1;
         all->file.no = 1;
     }
-    else if (strcmp(splited_line[0], "WE") == 0)
+    else if (ft_strcmp(splited_line[0], "WE") == 0)
     {
         if (all->file.we == 1)
             ft_exit(2, all);
@@ -153,7 +155,7 @@ int check_line(char *line, t_all *all)
         all->file.counter += 1;
         all->file.no = 1;
     }
-    else if (strcmp(splited_line[0], "EA") == 0)
+    else if (ft_strcmp(splited_line[0], "EA") == 0)
     {
         if (all->file.ea == 1)
             ft_exit(2, all);
@@ -161,14 +163,15 @@ int check_line(char *line, t_all *all)
         all->file.counter += 1;
         all->file.no = 1;
     }
-    else if (strcmp(splited_line[0], "S") == 0)
+    else if (ft_strcmp(splited_line[0], "S") == 0)
     {
         if (all->file.s == 1)
             ft_exit(2, all);
+        all->tex.file[4] = ft_path(splited_line[1]);
         all->file.counter += 1;
         all->file.no = 1;
     }
-    else if (strcmp(splited_line[0], "F") == 0)
+    else if (ft_strcmp(splited_line[0], "F") == 0)
     {
         if (all->file.f == 1)
             ft_exit(2, all);
@@ -176,7 +179,7 @@ int check_line(char *line, t_all *all)
         all->file.counter += 1;
         all->file.no = 1;
     }
-    else if (strcmp(splited_line[0], "C") == 0)
+    else if (ft_strcmp(splited_line[0], "C") == 0)
     {
         if (all->file.c == 1)
             ft_exit(2, all);
@@ -209,6 +212,7 @@ void read_file(char *path, t_all *all)
     all->file.we = 0;
     all->win.chr = 0;
     all->win.rows = 0;
+    all->num_sprt = 0;
     strmap = NULL;
     fd = open(path, O_RDONLY);
     if (fd == -1)

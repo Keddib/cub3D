@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/02 01:41:04 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/03 01:12:42 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void my_mlx_pixel_put(t_all *all, int x, int y, int color)
 {
 	char *dst;
-	dst = all->mlx.addr + (y * all->mlx.line_length + x * (all->mlx.bits_per_pixel / 8));
+	dst = all->mlx.addr + (y * all->mlx.line_length + x *
+		(all->mlx.bits_per_pixel / 8));
 	if (x < all->win.width && x >= 0 && y < all->win.height && y >= 0)
 		*(unsigned int *)dst = color;
 }
@@ -23,18 +24,21 @@ void my_mlx_pixel_put(t_all *all, int x, int y, int color)
 int update(t_all *all)
 {
 	mlx_destroy_image(all->mlx.pointer, all->mlx.image);
-	all->mlx.image = mlx_new_image(all->mlx.pointer, all->win.width, all->win.height);
+	all->mlx.image =
+	mlx_new_image(all->mlx.pointer, all->win.width, all->win.height);
 	all->mlx.addr = mlx_get_data_addr(
 		all->mlx.image,
 		&all->mlx.bits_per_pixel,
 		&all->mlx.line_length,
 		&all->mlx.endian);
 	update_player(all);
-	all->ray = malloc(sizeof(t_ray) * all->win.width);
 	cast_all_rays(all);
 	render_3d_projection(all);
-	free(all->ray);
-	mlx_put_image_to_window(all->mlx.pointer, all->mlx.window, all->mlx.image, 0, 0);
+	ft_sprites(all);
+	mlx_put_image_to_window(
+		all->mlx.pointer,
+		all->mlx.window,
+		all->mlx.image, 0, 0);
 	return 0;
 }
 
@@ -50,11 +54,14 @@ int main(int argc, char **argv)
 	all.win.half_win = (all.win.height / 2);
 	all.win.look = 0;
 	load_images(&all);
+	find_sprite(&all);
 	all.mlx.window = mlx_new_window(
 		all.mlx.pointer,
 		all.win.width,
 		all.win.height,
 		"Cub3d");
+	if (!(all.ray = malloc(sizeof(t_ray) * all.win.width)))
+		ft_exit(1, &all);
 	all.mlx.image = mlx_new_image(all.mlx.pointer, all.win.width, all.win.height);
 	all.mlx.addr = mlx_get_data_addr(all.mlx.image, &all.mlx.bits_per_pixel, &all.mlx.line_length, &all.mlx.endian);
 	mlx_hook(all.mlx.window, 2, 1L << 0, key_pressed, &all);

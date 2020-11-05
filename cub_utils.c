@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/02 02:43:01 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/03 02:00:42 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	update_player(t_all *all)
 	float side_step;
 	float nex_half;
 
-	next_half = all->win.half_win + (all->win.look * 5);
+	nex_half = all->win.half_win + (all->win.look * 5);
 	if (nex_half > (all->win.height / 4) &&
 			nex_half < ((all->win.height / 4) * 3))
 		all->win.half_win += (all->win.look * 5);
@@ -31,27 +31,34 @@ void	update_player(t_all *all)
 	side_step = all->fpp.side_direction * WALK_SPEED;
 	new_player_x += cos(all->fpp.rotation_angle + (90 * RADIUN)) * side_step;
 	new_player_y += sin(all->fpp.rotation_angle + (90 * RADIUN)) * side_step;
-	if (!is_this_wall(new_player_x, new_player_y, all))
+	if (!is_this_wall(new_player_x, new_player_y, all, 0))
 	{
 		all->fpp.x = new_player_x;
 		all->fpp.y = new_player_y;
 	}
 }
 
-int		is_this_wall(float x, float y, t_all *all)
+int		is_this_wall(float x, float y, t_all *all, int q)
 {
 	int index_x;
 	int index_y;
 
-	if (x < 0 || x > (all->win.rows * TILE_SIZE) ||
-			y < 0 || y > (all->win.cols * TILE_SIZE))
-		return (1);
 	index_x = floor(x / TILE_SIZE);
 	index_y = floor(y / TILE_SIZE);
-	if (index_y >= all->win.cols || index_x >= all->win.rows)
+	if (index_y >= all->win.cols || index_y < 0)
 		return (1);
-	if (all->win.array[index_y][index_x] == '1')
+	if (index_x < 0 || (size_t)index_x >= ft_strlen(all->win.array[index_y]))
 		return (1);
+	if (q == 1)
+	{
+		if (all->win.array[index_y][index_x] == '1')
+			return (1);
+	}
+	else
+	{
+		if (all->win.array[index_y][index_x] == '1' || all->win.array[index_y][index_x] == '2')
+			return (1);
+	}
 	return (0);
 }
 
@@ -67,17 +74,21 @@ int		ft_puterror(char *error)
 
 int		ft_exit(int i, t_all *all)
 {
-	int i;
+	int j;
 
-	i = 0;
+	j = 0;
 	if (i == 0)
 	{
 		ft_free(all->win.array, all->win.cols);
+		free(all->ray);
+		free(all->sprite);
+		while (i < 5)
+		{
+			free(all->tex.data[i]);
+			free(all->tex.file[i++]);
+		}
 		mlx_destroy_image(all->mlx.pointer, all->mlx.image);
 		mlx_destroy_window(all->mlx.pointer, all->mlx.window);
-		// free(all->ray);
-		while (i < 4)
-			free(all->tex.data[i++]);
 	}
 	else if (i == 1)
 		ft_puterror("ERROR\nFILE NOT FOUND\n");

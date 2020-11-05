@@ -6,15 +6,15 @@
 #    By: keddib <keddib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/24 23:20:45 by keddib            #+#    #+#              #
-#    Updated: 2020/11/02 01:07:09 by keddib           ###   ########.fr        #
+#    Updated: 2020/11/02 04:55:30 by keddib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 #-g -fsanitize=address
 
-SRC = main.c 3d.projection.c cast_rays.c cub_utils.c hundle_keys.c incept.c\
-read_file.c textures.c utils/get_next_line.c utils/ft_split.c\
+SRC = main.c 3d_projection.c cast_rays.c cub_utils.c hundle_keys.c incept.c\
+read_file.c textures.c sprites.c utils/get_next_line.c utils/ft_split.c\
 utils/cub_utils_two.c utils/cub_utils.c
 
 PATH = -I /usr/local/include -L /usr/local/lib
