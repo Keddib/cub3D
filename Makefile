@@ -14,7 +14,7 @@
 #-g -fsanitize=address
 
 SRC = main.c 3d_projection.c cast_rays.c cub_utils.c hundle_keys.c incept.c\
-read_file.c textures.c sprites.c utils/get_next_line.c utils/ft_split.c\
+read_file.c textures.c sprites.c bmp_file.c utils/get_next_line.c utils/ft_split.c\
 utils/cub_utils_two.c utils/cub_utils.c
 
 PATH = -I /usr/local/include -L /usr/local/lib

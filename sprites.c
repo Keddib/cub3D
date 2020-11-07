@@ -65,8 +65,9 @@ void	draw_sprite(t_all *all, t_sprite sprite)
 	{
 		if (sprite.offx + i < 0 || sprite.offx + i > all->win.width)
 			continue ;
-		if (all->ray[(int)(sprite.offx + i - 1)].distance <= sprite.distance)
-			continue ;
+		if ((int)(sprite.offx + i - 1) < all->win.width)
+			if (all->ray[(int)(sprite.offx + i - 1)].distance <= sprite.distance)
+				continue ;
 		j = -1;
 		while (++j < (int)sprite.size)
 		{

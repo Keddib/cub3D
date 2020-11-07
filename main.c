@@ -18,7 +18,26 @@ void my_mlx_pixel_put(t_all *all, int x, int y, int color)
 	dst = all->mlx.addr + (y * all->mlx.line_length + x *
 		(all->mlx.bits_per_pixel / 8));
 	if (x < all->win.width && x >= 0 && y < all->win.height && y >= 0)
+	{
+		int_to_rgb(all, color);
+		int ney = all->win.height - (y+1);
+		int index = ney * g_bmp.row_bytes + x * 3;
+		g_bmp.buffer[index + 0] = all->rgb.b;
+		g_bmp.buffer[index + 1] = all->rgb.g;
+		g_bmp.buffer[index + 2] = all->rgb.r;
 		*(unsigned int *)dst = color;
+	}
+}
+
+void save_bmp()
+{
+	int fd = open("img.bmp", O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
+	if (fd == -1)
+		return;
+	write(fd, g_bmp.header, 54);
+	write(fd, g_bmp.buffer, g_bmp.image_size);
+	close(fd);
+	free(g_bmp.buffer);
 }
 
 int update(t_all *all)
@@ -35,6 +54,8 @@ int update(t_all *all)
 	cast_all_rays(all);
 	render_3d_projection(all);
 	ft_sprites(all);
+	save_bmp();
+	ft_exit(0, all);
 	mlx_put_image_to_window(
 		all->mlx.pointer,
 		all->mlx.window,
@@ -45,7 +66,6 @@ int update(t_all *all)
 int main(int argc, char **argv)
 {
 	t_all all;
-
 	if (argc != 2)
 		ft_exit(2, &all);
 	all.mlx.pointer = mlx_init();
@@ -55,6 +75,7 @@ int main(int argc, char **argv)
 	all.win.look = 0;
 	load_images(&all);
 	find_sprite(&all);
+	create_bmp(&all);
 	all.mlx.window = mlx_new_window(
 		all.mlx.pointer,
 		all.win.width,

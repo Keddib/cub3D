@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <strings.h>
+
 #define BUFFER_SIZE 1024
 #define PI 3.14159265
 #define TWO_PI 6.28318530
@@ -13,6 +15,15 @@
 #define RAY_WIDTH 1
 #define INT_MAX 2147483647
 #define TILE_SIZE 64
+
+
+typedef struct s_rgb
+{
+    int r;
+    int g;
+    int b;
+
+} t_rgb;
 
 typedef struct s_ray
 {
@@ -118,6 +129,19 @@ typedef struct s_sprite
     int offy;
 } t_sprite;
 
+typedef struct s_bmp
+{
+    unsigned char *buffer;
+    unsigned char header[54];
+    unsigned char planes;
+    unsigned int file_size;
+    unsigned int pixel_data_offset;
+    unsigned int header_size;
+    unsigned int bits_ppixel;
+    unsigned int image_size;
+    int row_bytes;
+
+}   t_bmp;
 
 typedef struct s_all
 {
@@ -129,7 +153,10 @@ typedef struct s_all
     t_incept incept;
     t_ray *ray;
     t_sprite *sprite;
+    t_rgb rgb;
     int num_sprt;
 } t_all;
+
+t_bmp g_bmp;
 
 #endif

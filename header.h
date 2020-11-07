@@ -48,5 +48,7 @@ float 	sprite_dis_to_fpp(t_all *all, float x, float y);
 void	ft_sprites(t_all *all);
 float normlize_angle(float angle);
 int		ft_strcmp(const char *s1, const char *s2);
+int     create_bmp(t_all *all);
+void    int_to_rgb(t_all *all, unsigned int color);
 
 #endif
