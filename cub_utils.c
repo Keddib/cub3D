@@ -87,14 +87,13 @@ int		ft_exit(int i, t_all *all)
 			free(all->tex.data[i]);
 			free(all->tex.file[i++]);
 		}
-		// mlx_destroy_image(all->mlx.pointer, all->mlx.image);
-		mlx_destroy_window(all->mlx.pointer, all->mlx.window);
+		// mlx_destroy_image(g_mlx.ptr, g_mlx.img);
+		mlx_destroy_window(g_mlx.ptr, g_mlx.win);
 	}
 	else if (i == 1)
 		ft_puterror("Arguments Error\n");
 	else if (i == 2)
 		ft_puterror("Somthing is Missing Check Your File\n");
-	all->num_sprt = 0;
 	exit(0);
 }
 

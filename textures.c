@@ -65,13 +65,13 @@ void	*load_images(t_all *all)
 		fd = open(all->tex.file[i], O_RDONLY);
 		if (fd == -1)
 			ft_exit(2, all);
-		all->tex.img = mlx_xpm_file_to_image(all->mlx.pointer,
+		all->tex.img = mlx_xpm_file_to_image(g_mlx.ptr,
 				all->tex.file[i], &all->tex.width, &all->tex.height);
 		all->tex.data[i] = (unsigned int *)mlx_get_data_addr(
 				all->tex.img,
-				&all->mlx.bits_per_pixel,
-				&all->mlx.line_length,
-				&all->mlx.endian);
+				&g_mlx.bpp,
+				&g_mlx.line_n,
+				&g_mlx.endian);
 		free(all->tex.img);
 		i++;
 	}

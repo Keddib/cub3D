@@ -51,6 +51,17 @@ typedef struct s_data
     int endian;
 } t_data;
 
+typedef struct s_datax
+{
+    void *ptr;
+    void *img;
+    void *win;
+    char *addr;
+    int bpp;
+    int line_n;
+    int endian;
+} t_datax;
+
 typedef struct s_win
 {
     float width;
@@ -154,10 +165,12 @@ typedef struct s_all
     t_ray *ray;
     t_sprite *sprite;
     t_rgb rgb;
+    char *param1;
+	char *param2;
     int num_sprt;
     int save;
 } t_all;
 
 t_bmp g_bmp;
-
+t_datax g_mlx;
 #endif

@@ -24,16 +24,15 @@ FLAGS =  -lmlx -framework OpenGL -framework AppKit -lm
 GO = gcc -Wall -Werror -Wextra
 
 all:
-	@$(GO) $(SRC) -o cub3d $(PATH) $(FLAGS)
+	@$(GO) $(SRC) -o cub3d $(PATH) $(FLAGS) -D BONUS=0
 
 clean:
-	@rm -rf cub3d cub3d.dSYM
+	@rm -rf cub3d img.bmp
 
 fclean: clean
-	@rm -rf cud3d
 
 re: fclean all
 
-run:
-	@./cub3d map.cub
+bonus:
+	$(GO) $(SRC) -o cub3d $(PATH) $(FLAGS) -D BONUS=1
 
