@@ -59,13 +59,14 @@ void	draw_sprite(t_all *all, t_sprite sprite)
 	unsigned int		color;
 	float	factor;
 
+
 	i = -1;
 	factor = 64 / sprite.size;
 	while (++i < (int)sprite.size)
 	{
 		if (sprite.offx + i < 0 || sprite.offx + i > all->win.width)
 			continue ;
-		if ((int)(sprite.offx + i - 1) < all->win.width)
+		if ((int)(sprite.offx + i - 1) < all->win.width && (int)(sprite.offx + i - 1) >= 0)
 			if (all->ray[(int)(sprite.offx + i - 1)].distance <= sprite.distance)
 				continue ;
 		j = -1;
@@ -95,10 +96,10 @@ void	ft_sprites(t_all *all)
 		all->sprite[i].angle =  atan2f(all->sprite[i].y - all->fpp.y, all->sprite[i].x - all->fpp.x);
 		normalize_sprite_ang(all, rot_angle, i);
 			all->sprite[i].size = all->win.width / all->sprite[i].distance * (float)TILE_SIZE;
-		all->sprite[i].offx = (int)(((all->sprite[i].angle) - (rot_angle))
+		all->sprite[i].offx = (((all->sprite[i].angle) - (rot_angle))
 								* all->win.width / (60 * RADIUN)
 								+ (all->win.width / 2 - all->sprite[i].size / 2));
-		all->sprite[i].offy = (int)(all->win.half_win - all->sprite[i].size / 2);
+		all->sprite[i].offy = (all->win.half_win - all->sprite[i].size / 2);
 		draw_sprite(all, all->sprite[i]);
 		i++;
 	}
@@ -132,7 +133,4 @@ void find_sprite(t_all *all)
         j++;
     }
 }
-
-
-
 

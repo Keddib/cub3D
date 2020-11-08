@@ -9,8 +9,8 @@
 #define PI_TWO (PI * 2)
 #define FOV_ANGEL (60 * (PI / 180))
 #define RADIUN (PI / 180)
-#define WALK_SPEED 3
-#define TURN_SPEED (1 * RADIUN)
+#define WALK_SPEED 5
+#define TURN_SPEED (3 * RADIUN)
 #define FOV_ANGLE (60 * RADIUN)
 #define RAY_WIDTH 1
 #define INT_MAX 2147483647
@@ -155,6 +155,7 @@ typedef struct s_all
     t_sprite *sprite;
     t_rgb rgb;
     int num_sprt;
+    int save;
 } t_all;
 
 t_bmp g_bmp;

@@ -46,9 +46,10 @@ int str_containe(char **s, int n);
 void find_sprite(t_all *all);
 float 	sprite_dis_to_fpp(t_all *all, float x, float y);
 void	ft_sprites(t_all *all);
-float normlize_angle(float angle);
+float   normlize_angle(float angle);
 int		ft_strcmp(const char *s1, const char *s2);
 int     create_bmp(t_all *all);
 void    int_to_rgb(t_all *all, unsigned int color);
+void    save_bmp(t_all *all);
 
 #endif

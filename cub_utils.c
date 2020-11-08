@@ -87,15 +87,14 @@ int		ft_exit(int i, t_all *all)
 			free(all->tex.data[i]);
 			free(all->tex.file[i++]);
 		}
-		mlx_destroy_image(all->mlx.pointer, all->mlx.image);
+		// mlx_destroy_image(all->mlx.pointer, all->mlx.image);
 		mlx_destroy_window(all->mlx.pointer, all->mlx.window);
 	}
 	else if (i == 1)
-		ft_puterror("ERROR\nFILE NOT FOUND\n");
+		ft_puterror("Arguments Error\n");
 	else if (i == 2)
 		ft_puterror("Somthing is Missing Check Your File\n");
-	else if (i == 3)
-		ft_putstr("ERROR\nDUPP PLAYER\n");
+	all->num_sprt = 0;
 	exit(0);
 }
 

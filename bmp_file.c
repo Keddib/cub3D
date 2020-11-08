@@ -8,16 +8,17 @@ void int_to_rgb(t_all *all, unsigned int color)
 	all->rgb.b = color % 256;
 }
 
-// void save_bmp()
-// {
-// 	int fd = open("img.bmp", O_RDWR | O_CREAT | O_APPEND);
-// 	if (fd == -1)
-// 		return;
-// 	write(fd, g_bmp.header, 54);
-// 	write(fd, g_bmp.buffer, g_bmp.image_size);
-// 	close(fd);
-// 	free(g_bmp.buffer);
-// }
+void save_bmp(t_all *all)
+{
+	int fd = open("img.bmp", O_CREAT | O_RDWR, S_IWUSR | S_IRUSR);
+	if (fd == -1)
+		return;
+	write(fd, g_bmp.header, 54);
+	write(fd, g_bmp.buffer, g_bmp.image_size);
+	close(fd);
+	free(g_bmp.buffer);
+	ft_exit(0, all);
+}
 
 int create_bmp(t_all *all)
 {
@@ -25,7 +26,6 @@ int create_bmp(t_all *all)
     unsigned int height = all->win.height;
     g_bmp.bits_ppixel = 24;
     g_bmp.row_bytes = (unsigned int)(((g_bmp.bits_ppixel * (unsigned int)all->win.width + 31) / 32) * 4);
-    // g_bmp.row_bytes = all->win.width;
     g_bmp.image_size = g_bmp.row_bytes * all->win.height;
     g_bmp.pixel_data_offset = 54;
     g_bmp.header_size = 40;
@@ -42,7 +42,5 @@ int create_bmp(t_all *all)
     memcpy(g_bmp.header + 28, &g_bmp.bits_ppixel, 2);
     memcpy(g_bmp.header + 34, &g_bmp.image_size, 4);
     g_bmp.buffer = malloc(g_bmp.image_size);
-    // bzero(g_bmp.buffer, g_bmp.image_size);
-    // save_bmp();
     return (0);
 }
