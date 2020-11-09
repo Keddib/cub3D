@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 00:40:01 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/02 02:18:31 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/09 05:21:37 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ int		key_released(int key, t_all *all)
 	else if (key == 125)
 		all->win.look = 0;
 	return (0);
+}
+
+float	s_distance_to_fpp(t_all *all, float x, float y)
+{
+	float dx;
+	float dy;
+
+	dx = all->fpp.x - x;
+	dy = all->fpp.y - y;
+	return (sqrtf(powf(dx, 2) + powf(dy, 2)));
 }

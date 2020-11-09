@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/03 02:00:42 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/09 04:56:33 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,45 +56,11 @@ int		is_this_wall(float x, float y, t_all *all, int q)
 	}
 	else
 	{
-		if (all->win.array[index_y][index_x] == '1' || all->win.array[index_y][index_x] == '2')
+		if (all->win.array[index_y][index_x] == '1' ||
+		all->win.array[index_y][index_x] == '2')
 			return (1);
 	}
 	return (0);
-}
-
-int		ft_puterror(char *error)
-{
-	char *e;
-
-	e = "\033[1;31m(x) Error\n >> \033[0;31m";
-	write(1, e, ft_strlen(e));
-	write(1, error, ft_strlen(error));
-	return (0);
-}
-
-int		ft_exit(int i, t_all *all)
-{
-	int j;
-
-	j = 0;
-	if (i == 0)
-	{
-		ft_free(all->win.array, all->win.cols);
-		free(all->ray);
-		free(all->sprite);
-		while (i < 5)
-		{
-			free(all->tex.data[i]);
-			free(all->tex.file[i++]);
-		}
-		// mlx_destroy_image(g_mlx.ptr, g_mlx.img);
-		mlx_destroy_window(g_mlx.ptr, g_mlx.win);
-	}
-	else if (i == 1)
-		ft_puterror("Arguments Error\n");
-	else if (i == 2)
-		ft_puterror("Somthing is Missing Check Your File\n");
-	exit(0);
 }
 
 int		ft_strcmp(const char *s1, const char *s2)

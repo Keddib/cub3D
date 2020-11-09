@@ -6,34 +6,11 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 18:47:18 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/02 02:33:05 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/09 05:47:51 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-int		str_containe(char **s, int n)
-{
-	int i;
-	int j;
-	int yes;
-
-	i = 0;
-	while (i < n)
-	{
-		j = 0;
-		while (s[i][j])
-		{
-			if (s[i][j] == '1' || s[i][j] == ' ' || s[i][j] == '\n')
-				yes = 1;
-			else
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (yes);
-}
 
 int		change_rgb(char *s, t_all *all)
 {
