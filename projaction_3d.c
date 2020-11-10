@@ -6,25 +6,11 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 13:53:14 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 04:56:08 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:00:21 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-int		which_texture(t_all *all, int x)
-{
-	int wich_tex;
-
-	wich_tex = 0;
-	if (all->ray[x].was_hit_vertical && all->ray[x].facingright)
-		wich_tex = 3;
-	else if (all->ray[x].was_hit_vertical && all->ray[x].facingleft)
-		wich_tex = 2;
-	else if (all->ray[x].was_hit_vertical == 0 && all->ray[x].facingdown)
-		wich_tex = 1;
-	return (wich_tex);
-}
 
 void	calculate_walls(t_all *all, int x, int ws_height)
 {

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 04:56:33 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:08:10 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,44 @@ int		is_this_wall(float x, float y, t_all *all, int q)
 	return (0);
 }
 
-int		ft_strcmp(const char *s1, const char *s2)
+void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 {
-	size_t			i;
-	unsigned char	*s;
-	unsigned char	*z;
+	char	*dst;
+	int		newy;
+	int		index;
 
-	s = (unsigned char *)s1;
-	z = (unsigned char *)s2;
-	if (!s1 && !s2)
-		return (0);
-	i = 0;
-	while (s[i] != '\0' || z[i] != '\0')
+	dst = g_mlx.addr + (y * g_mlx.line_n + x * (g_mlx.bpp / 8));
+	if (x < all->win.width && x >= 0 && y < all->win.height && y >= 0)
 	{
-		if (s[i] - z[i] != 0)
-			return (s[i] - z[i]);
-		i++;
+		if (all->save == 1)
+		{
+			int_to_rgb(all, color);
+			newy = all->win.height - (y + 1);
+			index = newy * g_bmp.row_bytes + x * 3;
+			g_bmp.buffer[index + 0] = all->rgb.b;
+			g_bmp.buffer[index + 1] = all->rgb.g;
+			g_bmp.buffer[index + 2] = all->rgb.r;
+		}
+		*(unsigned int *)dst = color;
 	}
-	return (*s1 - *s2);
+}
+
+float	s_distance_to_fpp(t_all *all, float x, float y)
+{
+	float dx;
+	float dy;
+
+	dx = all->fpp.x - x;
+	dy = all->fpp.y - y;
+	return (sqrtf(powf(dx, 2) + powf(dy, 2)));
+}
+
+int		sprite_color(t_all *all, t_sprite sprite, int i, int j)
+{
+	int color;
+
+	color = all->tex.data[4][(unsigned int)(all->tex.width *
+				(all->tex.height * j / (int)(sprite.size)) +
+					(all->tex.width * i / (int)sprite.size))];
+	return (color);
 }

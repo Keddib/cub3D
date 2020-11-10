@@ -1,4 +1,4 @@
-R          1000 700
+R         1200 1000
 
 NO ./tpics/colorstone.xpm
 SO ./tpics/greystone.xpm

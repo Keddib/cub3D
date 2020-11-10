@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:58:16 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 06:39:23 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:27:02 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ char	*ft_path(const char *s);
 void	initializer_one(t_all *all);
 void	initializer_two(t_all *all);
 int		ft_close(t_all *all);
+int		which_texture(t_all *all, int x);
+void	ft_bzero(void *s, size_t n);
+void	*ft_memcpy(void *dst, const void *src, size_t len);
 
 #endif

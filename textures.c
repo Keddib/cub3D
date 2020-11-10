@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 18:47:18 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 05:47:51 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:00:31 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ int		change_rgb(char *s, t_all *all)
 	color += ft_atoi(lines[2]);
 	ft_free(lines, cols);
 	return (color);
+}
+
+int		which_texture(t_all *all, int x)
+{
+	int wich_tex;
+
+	wich_tex = 0;
+	if (all->ray[x].was_hit_vertical && all->ray[x].facingright)
+		wich_tex = 3;
+	else if (all->ray[x].was_hit_vertical && all->ray[x].facingleft)
+		wich_tex = 2;
+	else if (all->ray[x].was_hit_vertical == 0 && all->ray[x].facingdown)
+		wich_tex = 1;
+	return (wich_tex);
 }
 
 void	*load_images(t_all *all)

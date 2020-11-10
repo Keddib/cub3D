@@ -6,40 +6,11 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:11:46 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 04:56:14 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:01:42 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-void	*ft_memcpy(void *dst, const void *src, size_t len)
-{
-	char		*d;
-	const char	*s;
-
-	d = dst;
-	s = src;
-	while (len > 0)
-	{
-		*d = *s;
-		d++;
-		s++;
-		len--;
-	}
-	return (dst);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	int		i;
-
-	i = 0;
-	while (n < 0)
-	{
-		*(char*)s = 0x00;
-		s++;
-	}
-}
 
 void	int_to_rgb(t_all *all, unsigned int color)
 {

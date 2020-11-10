@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 06:19:46 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 06:24:45 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:42:55 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,27 @@ void	initializer_two(t_all *all)
 	all->win.look = 0;
 	if (!(all->ray = malloc(sizeof(t_ray) * all->win.width)))
 		ft_exit(1, all);
+}
+
+void	init_errors(void)
+{
+	g_messages[0] = "Invalid file name!\n";
+	g_messages[1] = "Added info in an element\n";
+	g_messages[2] = "Duplicate Texture\n";
+	g_messages[3] = "Duplicate Color\n";
+	g_messages[4] = "Error in Resolution\n";
+	g_messages[5] = "Stop Idiot! You have reached the range of g_screen\n";
+	g_messages[6] = "Invalid Map\n";
+	g_messages[7] = "NO SUCH FILE OR DIRECTORY\n";
+	g_messages[8] = "Allocation Failed\n";
+	g_messages[9] = "STOP! you need XPM file\n";
+	g_messages[10] = "INVALID MAP LINE\n";
+	g_messages[11] = "NO PLAYER FOUNDED\n";
+	g_messages[12] = "NEW LINE IN MAP\n";
+	g_messages[13] = "DUPLICATE_PLAYER\n";
+	g_messages[14] = "INVALID CHARCATER\n";
+	g_messages[15] = "INVALID COLORS\n";
+	g_messages[16] = "DUPLICATE_SPRITE\n";
+	g_messages[17] = "ARGUMENTS ARE MORE OR LESS\n";
+	g_messages[18] = "ARE YOU KIDDING ME IF YOU WANNA PLAY FIX RESOLUTION\n";
 }

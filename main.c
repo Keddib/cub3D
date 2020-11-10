@@ -6,33 +6,11 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 06:47:59 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:07:12 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
-{
-	char	*dst;
-	int		newy;
-	int		index;
-
-	dst = g_mlx.addr + (y * g_mlx.line_n + x * (g_mlx.bpp / 8));
-	if (x < all->win.width && x >= 0 && y < all->win.height && y >= 0)
-	{
-		if (all->save == 1)
-		{
-			int_to_rgb(all, color);
-			newy = all->win.height - (y + 1);
-			index = newy * g_bmp.row_bytes + x * 3;
-			g_bmp.buffer[index + 0] = all->rgb.b;
-			g_bmp.buffer[index + 1] = all->rgb.g;
-			g_bmp.buffer[index + 2] = all->rgb.r;
-		}
-		*(unsigned int *)dst = color;
-	}
-}
 
 int		update(t_all *all)
 {
@@ -52,7 +30,6 @@ int		update(t_all *all)
 int		setup(t_all *all)
 {
 	g_mlx.ptr = mlx_init();
-	init_errors();
 	check_arguments(all);
 	initializer_one(all);
 	read_file(all->param1, all);
@@ -76,6 +53,7 @@ int		main(int argc, char **argv)
 {
 	t_all all;
 
+	init_errors();
 	if (argc == 2)
 		all.param1 = argv[1];
 	else if (argc == 3)

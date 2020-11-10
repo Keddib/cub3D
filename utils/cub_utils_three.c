@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 06:16:37 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 06:38:57 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:01:48 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,57 +37,51 @@ char	*ft_path(const char *s)
 	return (cpy);
 }
 
-int		ft_close(t_all *all)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	ft_exit(0, all);
-	return (0);
-}
+	size_t			i;
+	unsigned char	*s;
+	unsigned char	*z;
 
-void	check_suffix(char *s, char *cub, t_all *all)
-{
-	int i;
-	int j;
-
+	s = (unsigned char *)s1;
+	z = (unsigned char *)s2;
+	if (!s1 && !s2)
+		return (0);
 	i = 0;
-	j = 0;
-	while (s[i])
+	while (s[i] != '\0' || z[i] != '\0')
+	{
+		if (s[i] - z[i] != 0)
+			return (s[i] - z[i]);
 		i++;
-	i -= 1;
-	while (cub[j])
-	{
-		if (s[i] == cub[j])
-			i--;
-		else
-			ft_exit(9, all);
-		j++;
 	}
+	return (*s1 - *s2);
 }
 
-void	check_arguments(t_all *all)
+void	*ft_memcpy(void *dst, const void *src, size_t len)
 {
-	int i;
-	int j;
+	char		*d;
+	const char	*s;
+
+	d = dst;
+	s = src;
+	while (len > 0)
+	{
+		*d = *s;
+		d++;
+		s++;
+		len--;
+	}
+	return (dst);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	int		i;
 
 	i = 0;
-	j = 0;
-	if (all->param2)
+	while (n < 0)
 	{
-		if (ft_strcmp("--save", all->param2) == 0)
-			all->save = 1;
-		else
-			ft_exit(1, all);
+		*(char*)s = 0x00;
+		s++;
 	}
-	if (!all->param1 || strlen(all->param1) <= 4)
-		ft_exit(1, all);
-	check_suffix(all->param1, "buc.", all);
-}
-
-int		sprite_color(t_all *all, t_sprite sprite, int i, int j)
-{
-	int color;
-
-	color = all->tex.data[4][(unsigned int)(all->tex.width *
-				(all->tex.height * j / (int)(sprite.size)) +
-					(all->tex.width * i / (int)sprite.size))];
-	return (color);
 }

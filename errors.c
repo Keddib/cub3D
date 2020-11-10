@@ -6,39 +6,17 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:55:54 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 06:48:40 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:46:11 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	init_errors(void)
-{
-	g_messages[0] = "Invalid file name!";
-	g_messages[1] = "Added info in an element";
-	g_messages[2] = "Duplicate Texture";
-	g_messages[3] = "Duplicate Color";
-	g_messages[4] = "Error in Resolution";
-	g_messages[5] = "Stop Idiot! You have reached the range of g_screen";
-	g_messages[6] = "Invalid Map";
-	g_messages[7] = "NO SUCH FILE OR DIRECTORY";
-	g_messages[8] = "Allocation Failed";
-	g_messages[9] = "STOP! you need XPM file";
-	g_messages[10] = "INVALID MAP LINE";
-	g_messages[11] = "NO PLAYER FOUNDED";
-	g_messages[12] = "NEW LINE IN MAP";
-	g_messages[13] = "DUPLICATE_PLAYER";
-	g_messages[14] = "INVALID CHARCATER";
-	g_messages[15] = "INVALID COLORS";
-	g_messages[16] = "DUPLICATE_SPRITE";
-	g_messages[17] = "ARGUMENTS ARE MORE OR LESS";
-}
-
 int		ft_puterror(char *error)
 {
 	char *e;
 
-	e = "\033[1;31m(x) Error\n >> \033[0;31m";
+	e = "\033[1;31m(x) Error\n >> \033[2;31m";
 	write(1, e, ft_strlen(e));
 	write(1, error, ft_strlen(error));
 	return (0);
@@ -75,4 +53,43 @@ int		ft_exit(int i, t_all *all)
 	else
 		ft_puterror(g_messages[i]);
 	exit(0);
+}
+
+void	check_suffix(char *s, char *cub, t_all *all)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (s[i])
+		i++;
+	i -= 1;
+	while (cub[j])
+	{
+		if (s[i] == cub[j])
+			i--;
+		else
+			ft_exit(9, all);
+		j++;
+	}
+}
+
+void	check_arguments(t_all *all)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (all->param2)
+	{
+		if (ft_strcmp("--save", all->param2) == 0)
+			all->save = 1;
+		else
+			ft_exit(1, all);
+	}
+	if (!all->param1 || strlen(all->param1) <= 4)
+		ft_exit(1, all);
+	check_suffix(all->param1, "buc.", all);
 }

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 06:13:01 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 06:37:41 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 01:27:00 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,20 @@ void	check_element(char **splited_line, t_all *all, int i)
 
 void	check_resolution(t_all *all, int cols, char **lines)
 {
-	//todo // check resolution if bigger than any machine
-	// int width;
-	// int height;
 	if (cols != 3 || all->file.res == 1)
 		ft_exit(4, all);
 	all->win.width = ft_atoi(lines[1]);
 	all->win.height = ft_atoi(lines[2]);
 	all->file.counter += 1;
 	all->file.res = 1;
-	// mlx_get_screen_size(g_mlx.ptr, &width, &height);
-	// // printf("x = %d| y == %d\n", width, height);
-	// ft_exit(1, all);
+	if (all->win.width > 2560)
+		all->win.width = 2560;
+	if (all->win.height > 1395)
+		all->win.height = 1395;
+	if (all->win.width < 100)
+		ft_exit(18, all);
+	if (all->win.height < 100)
+		ft_exit(18, all);
 }
 
 int		str_ismap(char **s, int n)

@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:44:34 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 04:56:24 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:38:52 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,6 @@ typedef struct	s_all
 
 t_bmp			g_bmp;
 t_data			g_mlx;
-t_string		g_messages[18];
+t_string		g_messages[19];
 
 #endif
