@@ -54,7 +54,7 @@ Using ``make run`` will make and run the mandatory part.
 
 You can edit ``map.cub`` to change the resolution and the texture .
 
-You can edit ``map.cub`` to change the texture you want but make sure to use 64/64 texture
+You can edit ``map.cub`` to change the texture you want but make sure to use 64/64 texture and it's ``.xpm``
 
 You can also change ``map.cub`` file but make sure it's have the same structure and it ends with ``.cub``
 
