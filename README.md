@@ -50,9 +50,13 @@ The basic program that was required to pass. It only includes wall textures and 
 
 ### How to run it (mandatory part only)
 
-Using ``make test`` will make and run the mandatory part.
+Using ``make run`` will make and run the mandatory part.
 
-You can also use ``make`` to generate the ``cub3D`` executable. You can launch it with ``./cub3D``.
+You can edit ``map.cub`` to change the resolution and the texture .
+
+You can edit ``map.cub`` to change the texture you want but make sure to use 64/64 texture
+
+You can also change ``map.cub`` file but make sure it's have the same structure and it ends with ``.cub``
 
 ### Controls (mandatory part only)
 
