@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_utils.c                                        :+:      :+:    :+:   */
+/*   mlx_cub_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 00:08:10 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 03:20:14 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+void	update_bonus(t_all *all, float new_px, float new_py)
+{
+	all->win.half_win = g_half_win;
+	if (!is_this_wall(new_px, new_py, all, 0))
+	{
+		all->fpp.x = new_px;
+		all->fpp.y = new_py;
+	}
+}
 
 void	update_player(t_all *all)
 {
@@ -20,10 +30,10 @@ void	update_player(t_all *all)
 	float side_step;
 	float nex_half;
 
-	nex_half = all->win.half_win + (all->win.look * 5);
+	nex_half = g_half_win + (all->win.look * 5);
 	if (nex_half > (all->win.height / 4) &&
 			nex_half < ((all->win.height / 4) * 3))
-		all->win.half_win += (all->win.look * 5);
+		g_half_win += (all->win.look * 5);
 	all->fpp.rotation_angle += all->fpp.turn_direction * TURN_SPEED;
 	move_step = all->fpp.walk_direction * WALK_SPEED;
 	new_player_x = all->fpp.x + cos(all->fpp.rotation_angle) * move_step;
@@ -31,7 +41,9 @@ void	update_player(t_all *all)
 	side_step = all->fpp.side_direction * WALK_SPEED;
 	new_player_x += cos(all->fpp.rotation_angle + (90 * RADIUN)) * side_step;
 	new_player_y += sin(all->fpp.rotation_angle + (90 * RADIUN)) * side_step;
-	if (!is_this_wall(new_player_x, new_player_y, all, 0))
+	if (BONUS == 1)
+		update_bonus(all, new_player_x, new_player_y);
+	else
 	{
 		all->fpp.x = new_player_x;
 		all->fpp.y = new_player_y;
@@ -83,24 +95,4 @@ void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 		}
 		*(unsigned int *)dst = color;
 	}
-}
-
-float	s_distance_to_fpp(t_all *all, float x, float y)
-{
-	float dx;
-	float dy;
-
-	dx = all->fpp.x - x;
-	dy = all->fpp.y - y;
-	return (sqrtf(powf(dx, 2) + powf(dy, 2)));
-}
-
-int		sprite_color(t_all *all, t_sprite sprite, int i, int j)
-{
-	int color;
-
-	color = all->tex.data[4][(unsigned int)(all->tex.width *
-				(all->tex.height * j / (int)(sprite.size)) +
-					(all->tex.width * i / (int)sprite.size))];
-	return (color);
 }

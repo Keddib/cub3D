@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 06:19:46 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 00:42:55 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/10 03:13:29 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	initializer_two(t_all *all)
 {
 	all->win.proj_plane = (all->win.width / 2) / tan(FOV_ANGLE / 2);
 	all->win.half_win = (all->win.height / 2);
+	g_half_win = (all->win.height / 2);
 	all->win.look = 0;
 	if (!(all->ray = malloc(sizeof(t_ray) * all->win.width)))
 		ft_exit(1, all);
@@ -58,4 +59,24 @@ void	init_errors(void)
 	g_messages[16] = "DUPLICATE_SPRITE\n";
 	g_messages[17] = "ARGUMENTS ARE MORE OR LESS\n";
 	g_messages[18] = "ARE YOU KIDDING ME IF YOU WANNA PLAY FIX RESOLUTION\n";
+}
+
+float	s_distance_to_fpp(t_all *all, float x, float y)
+{
+	float dx;
+	float dy;
+
+	dx = all->fpp.x - x;
+	dy = all->fpp.y - y;
+	return (sqrtf(powf(dx, 2) + powf(dy, 2)));
+}
+
+int		sprite_color(t_all *all, t_sprite sprite, int i, int j)
+{
+	int color;
+
+	color = all->tex.data[4][(unsigned int)(all->tex.width *
+				(all->tex.height * j / (int)(sprite.size)) +
+					(all->tex.width * i / (int)sprite.size))];
+	return (color);
 }
