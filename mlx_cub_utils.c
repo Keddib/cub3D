@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/11 05:59:01 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/12 00:20:55 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 			g_bmp.buffer[index + 1] = all->rgb.g;
 			g_bmp.buffer[index + 2] = all->rgb.r;
 		}
-		*(unsigned int *)dst = color;
+		else
+			*(unsigned int *)dst = color;
 	}
 }
