@@ -26,9 +26,9 @@ You should be able to survive if you get to the third floor, and kill everyone t
 
 ### How to run it
 
-Using ``make bonus`` will build the executable and run it.
+Using ``make bonus`` will build the executable.
 
-To run it again without remaking, you can simply run the executable with ``./cub3D``.
+you can simply run the executable with ``./cub3D map.cub``.
 
 ### Controls
 
@@ -36,7 +36,7 @@ You can move around the maze with ``W`` ``A`` ``S`` ``D``.
 
 You can also rotate the view with the directional arrows ``←`` and ``→``.
 
-You can shoot/stab with ``SPACE`` and open doors with ``SHIFT``.
+You can look up and down with the directional arrows ``↑`` and ``↓``.
 
 To exit the game, press ``ESC`` or click the red cross.
 
@@ -50,7 +50,9 @@ The basic program that was required to pass. It only includes wall textures and 
 
 ### How to run it (mandatory part only)
 
-Using ``make run`` will make and run the mandatory part.
+Using ``make`` will build the executable of the mandatory part.
+
+you can simply run the executable with ``./cub3D map.cub``.
 
 You can edit ``map.cub`` to change the resolution and the texture .
 
