@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 21:49:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 01:56:44 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/11 01:45:08 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int		update(t_all *all)
 	ft_sprites(all);
 	if (all->save == 1)
 		save_bmp(all);
+	if (BONUS)
+		hold_weapon(all);
 	mlx_put_image_to_window(
 		g_mlx.ptr,
 		g_mlx.win,
 		g_mlx.img, 0, 0);
-	// mlx_destroy_image(g_mlx.ptr, g_mlx.img);
 	return (0);
 }
 
@@ -42,16 +43,14 @@ int		setup(t_all *all)
 		create_bmp(all);
 		update(all);
 	}
-	else{
-		g_mlx.win = mlx_new_window(
-			g_mlx.ptr,
-			all->win.width,
-			all->win.height,
-			"Cub3d");
-		g_mlx.img = mlx_new_image(g_mlx.ptr, all->win.width, all->win.height);
-		g_mlx.addr =
-		mlx_get_data_addr(g_mlx.img, &g_mlx.bpp, &g_mlx.line_n, &g_mlx.endian);
-	}
+	g_mlx.win = mlx_new_window(
+		g_mlx.ptr,
+		all->win.width,
+		all->win.height,
+		"Cub3d");
+	g_mlx.img = mlx_new_image(g_mlx.ptr, all->win.width, all->win.height);
+	g_mlx.addr =
+	mlx_get_data_addr(g_mlx.img, &g_mlx.bpp, &g_mlx.line_n, &g_mlx.endian);
 	return (0);
 }
 

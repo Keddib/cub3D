@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 06:19:46 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 03:13:29 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/11 05:16:22 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int		sprite_color(t_all *all, t_sprite sprite, int i, int j)
 {
 	int color;
 
-	color = all->tex.data[4][(unsigned int)(all->tex.width *
-				(all->tex.height * j / (int)(sprite.size)) +
-					(all->tex.width * i / (int)sprite.size))];
+	color = all->tex.data[4][(unsigned int)(64 *
+				(64 * j / (int)(sprite.size)) +
+					(64 * i / (int)sprite.size))];
 	return (color);
 }

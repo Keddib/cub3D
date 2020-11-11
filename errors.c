@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:55:54 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 00:46:11 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/11 01:42:42 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,15 @@ int		ft_exit(int i, t_all *all)
 		free(all->ray);
 		free(all->sprite);
 		while (j < 5)
-			free(all->tex.file[j++]);
-		if(i == 100)
-    	{
-			free(g_mlx.ptr);
-			exit(0);
-		}
-		else
 		{
-			for(int q = 0; q < 5; q++)
-				mlx_destroy_image(g_mlx.ptr, all->tex.img[j]);
-			mlx_destroy_image(g_mlx.ptr, g_mlx.img);
-			mlx_destroy_window(g_mlx.ptr, g_mlx.win);
-			free(g_mlx.ptr);
+			free(all->tex.data[j]);
+			free(all->tex.file[j++]);
 		}
-
+		if (i == 100)
+			exit(0);
+		mlx_destroy_image(g_mlx.ptr, g_mlx.img);
+		mlx_destroy_window(g_mlx.ptr, g_mlx.win);
+		free(g_mlx.ptr);
 	}
 	else
 		ft_puterror(g_messages[i]);

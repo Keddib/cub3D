@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:58:16 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 00:27:02 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/12 00:15:03 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int		ft_close(t_all *all);
 int		which_texture(t_all *all, int x);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t len);
+void	hold_weapon(t_all *all);
 
 #endif

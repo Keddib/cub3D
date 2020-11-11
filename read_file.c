@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 09:45:37 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/09 06:28:34 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/11 05:49:14 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static void		check_char(char c, t_all *all)
 {
-	if (c != '1' && c != '0' && c != '2' && c != 'W' &&
+	if (BONUS && c != '1' && c != '0' && c != '2' && c != 'W' &&
+		c != 'N' && c != 'S' && c != 'E' && c != ' ' && c != '4')
+		ft_exit(14, all);
+	if (!BONUS && c != '1' && c != '0' && c != '2' && c != 'W' &&
 		c != 'N' && c != 'S' && c != 'E' && c != ' ')
 		ft_exit(14, all);
 	if ((c == 'N' || c == 'W' || c == 'S' || c == 'E') && all->win.chr == 1)
@@ -65,7 +68,8 @@ static int		check_error(t_all *all)
 		{
 			if (all->win.array[j][i] == '0' || all->win.array[j][i] == 'N' ||
 				all->win.array[j][i] == 'W' || all->win.array[j][i] == '2' ||
-				all->win.array[j][i] == 'E' || all->win.array[j][i] == 'S')
+				all->win.array[j][i] == 'E' || all->win.array[j][i] == 'S' ||
+				all->win.array[j][i] == '4')
 				check_array(j, i, all);
 			check_char(all->win.array[j][i], all);
 			i++;

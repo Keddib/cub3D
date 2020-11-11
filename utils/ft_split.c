@@ -58,11 +58,9 @@ void			*ft_free(char **s, int i)
 	while (i >= 0)
 	{
 		free(s[i]);
-		s[i] = NULL;
 		i--;
 	}
 	free(s);
-	s = NULL;
 	return (NULL);
 }
 

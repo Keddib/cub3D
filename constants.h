@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:44:34 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 03:02:54 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/11 23:52:41 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ typedef struct	s_incept
 
 typedef struct	s_texture
 {
-	void			*img[5];
-	unsigned int	*data[5];
-	char			*file[5];
+	void			*img;
+	unsigned int	*data[7];
+	char			*file[7];
 	int				width;
 	int				height;
 	int				color[2];
@@ -161,6 +161,17 @@ typedef struct	s_all
 	int			num_sprt;
 	int			save;
 }				t_all;
+
+typedef struct	s_boonus
+{
+	float	start_x;
+	float	end_x;
+	float	start_y;
+	float	end_y;
+	float	factor;
+	int		offy;
+	int		offx;
+}				t_bonus;
 
 t_bmp			g_bmp;
 t_data			g_mlx;

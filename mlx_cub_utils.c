@@ -6,7 +6,7 @@
 /*   By: keddib <keddib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 01:59:36 by keddib            #+#    #+#             */
-/*   Updated: 2020/11/10 03:20:14 by keddib           ###   ########.fr       */
+/*   Updated: 2020/11/11 05:59:01 by keddib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		is_this_wall(float x, float y, t_all *all, int q)
 		return (1);
 	if (q == 1)
 	{
-		if (all->win.array[index_y][index_x] == '1')
+		if (all->win.array[index_y][index_x] == '1' ||
+		all->win.array[index_y][index_x] == '4')
 			return (1);
 	}
 	else
@@ -81,6 +82,7 @@ void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 	int		newy;
 	int		index;
 
+	dst = g_mlx.addr + (y * g_mlx.line_n + x * (g_mlx.bpp / 8));
 	if (x < all->win.width && x >= 0 && y < all->win.height && y >= 0)
 	{
 		if (all->save == 1)
@@ -92,10 +94,6 @@ void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 			g_bmp.buffer[index + 1] = all->rgb.g;
 			g_bmp.buffer[index + 2] = all->rgb.r;
 		}
-		else
-		{
-			dst = g_mlx.addr + (y * g_mlx.line_n + x * (g_mlx.bpp / 8));
-			*(unsigned int *)dst = color;
-		}
+		*(unsigned int *)dst = color;
 	}
 }
