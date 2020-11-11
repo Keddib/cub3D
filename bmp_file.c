@@ -31,7 +31,7 @@ void	save_bmp(t_all *all)
 	write(fd, g_bmp.buffer, g_bmp.image_size);
 	close(fd);
 	free(g_bmp.buffer);
-	ft_exit(0, all);
+	ft_exit(100, all);
 }
 
 int		create_bmp(t_all *all)

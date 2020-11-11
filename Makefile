@@ -18,12 +18,12 @@ read_file.c textures.c sprites.c bmp_file.c errors.c file_elements.c \
 initializer.c utils/get_next_line.c utils/ft_split.c utils/cub_utils_two.c\
 utils/cub_utils.c utils/cub_utils_three.c
 
-FLAGS =  -lmlx -framework OpenGL -framework AppKit -lm
+FLAGS =  -lmlx -lXext -lX11 -lm
 
-GO = gcc -Wall -Werror -Wextra
+GO = clang
 
 all:
-	@$(GO) $(SRC) -o cub3d $(FLAGS) -D BONUS=0
+	@$(GO) -g $(SRC) -o cub3d $(FLAGS) -D BONUS=0
 
 clean:
 	@rm -rf cub3d img.bmp

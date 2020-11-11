@@ -14,38 +14,38 @@
 
 int		key_pressed(int key, t_all *all)
 {
-	if (key == 53)
+	if (key == 65307)
 		ft_exit(0, all);
-	if (key == 13)
+	if (key == 119)
 		all->fpp.walk_direction = +1;
-	else if (key == 1)
+	else if (key == 115)
 		all->fpp.walk_direction = -1;
-	else if (key == 2)
+	else if (key == 100)
 		all->fpp.side_direction = +1;
-	else if (key == 0)
+	else if (key == 97)
 		all->fpp.side_direction = -1;
-	else if (key == 124)
+	else if (key == 65363)
 		all->fpp.turn_direction = +1;
-	else if (key == 123)
+	else if (key == 65361)
 		all->fpp.turn_direction = -1;
-	else if (key == 126)
+	else if (key == 65364)
 		all->win.look = 1;
-	else if (key == 125)
+	else if (key == 65362)
 		all->win.look = -1;
 	return (0);
 }
 
 int		key_released(int key, t_all *all)
 {
-	if (key == 13 || key == 1)
+	if (key == 119|| key == 115)
 		all->fpp.walk_direction = 0;
-	else if (key == 2 || key == 0)
+	else if (key == 100 || key == 97)
 		all->fpp.side_direction = 0;
-	else if (key == 124 || key == 123)
+	else if (key == 65361 || key == 65363)
 		all->fpp.turn_direction = 0;
-	else if (key == 126)
+	else if (key == 65364)
 		all->win.look = 0;
-	else if (key == 125)
+	else if (key == 65362)
 		all->win.look = 0;
 	return (0);
 }

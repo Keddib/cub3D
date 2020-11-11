@@ -37,18 +37,27 @@ int		ft_exit(int i, t_all *all)
 	int j;
 
 	j = 0;
-	if (i == 0)
+	if (i == 0 || i == 100)
 	{
 		ft_free(all->win.array, all->win.cols);
 		free(all->ray);
 		free(all->sprite);
 		while (j < 5)
-		{
-			free(all->tex.data[j]);
 			free(all->tex.file[j++]);
+		if(i == 100)
+    	{
+			free(g_mlx.ptr);
+			exit(0);
 		}
-		mlx_destroy_image(g_mlx.ptr, g_mlx.img);
-		mlx_destroy_window(g_mlx.ptr, g_mlx.win);
+		else
+		{
+			for(int q = 0; q < 5; q++)
+				mlx_destroy_image(g_mlx.ptr, all->tex.img[j]);
+			mlx_destroy_image(g_mlx.ptr, g_mlx.img);
+			mlx_destroy_window(g_mlx.ptr, g_mlx.win);
+			free(g_mlx.ptr);
+		}
+
 	}
 	else
 		ft_puterror(g_messages[i]);

@@ -24,6 +24,7 @@ int		update(t_all *all)
 		g_mlx.ptr,
 		g_mlx.win,
 		g_mlx.img, 0, 0);
+	// mlx_destroy_image(g_mlx.ptr, g_mlx.img);
 	return (0);
 }
 
@@ -37,15 +38,20 @@ int		setup(t_all *all)
 	load_images(all);
 	find_sprite(all);
 	if (all->save == 1)
+	{
 		create_bmp(all);
-	g_mlx.win = mlx_new_window(
-		g_mlx.ptr,
-		all->win.width,
-		all->win.height,
-		"Cub3d");
-	g_mlx.img = mlx_new_image(g_mlx.ptr, all->win.width, all->win.height);
-	g_mlx.addr =
-	mlx_get_data_addr(g_mlx.img, &g_mlx.bpp, &g_mlx.line_n, &g_mlx.endian);
+		update(all);
+	}
+	else{
+		g_mlx.win = mlx_new_window(
+			g_mlx.ptr,
+			all->win.width,
+			all->win.height,
+			"Cub3d");
+		g_mlx.img = mlx_new_image(g_mlx.ptr, all->win.width, all->win.height);
+		g_mlx.addr =
+		mlx_get_data_addr(g_mlx.img, &g_mlx.bpp, &g_mlx.line_n, &g_mlx.endian);
+	}
 	return (0);
 }
 

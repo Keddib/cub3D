@@ -81,7 +81,6 @@ void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 	int		newy;
 	int		index;
 
-	dst = g_mlx.addr + (y * g_mlx.line_n + x * (g_mlx.bpp / 8));
 	if (x < all->win.width && x >= 0 && y < all->win.height && y >= 0)
 	{
 		if (all->save == 1)
@@ -93,6 +92,10 @@ void	my_mlx_pixel_put(t_all *all, int x, int y, int color)
 			g_bmp.buffer[index + 1] = all->rgb.g;
 			g_bmp.buffer[index + 2] = all->rgb.r;
 		}
-		*(unsigned int *)dst = color;
+		else
+		{
+			dst = g_mlx.addr + (y * g_mlx.line_n + x * (g_mlx.bpp / 8));
+			*(unsigned int *)dst = color;
+		}
 	}
 }

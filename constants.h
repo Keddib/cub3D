@@ -106,7 +106,7 @@ typedef struct	s_incept
 
 typedef struct	s_texture
 {
-	void			*img;
+	void			*img[5];
 	unsigned int	*data[5];
 	char			*file[5];
 	int				width;
